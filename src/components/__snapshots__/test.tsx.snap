@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`other tests it renders correct markup for case X 1`] = `
+.c0 {
+  color: red;
+  font-size: 10px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+<button
+  class="c0"
+/>
+`;
+
+exports[`style tests it renders correct styles for X 1`] = `
+.c0 {
+  color: red;
+  font-size: 10px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+<button
+  className="c0"
+/>
+`;

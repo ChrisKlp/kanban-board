@@ -48,12 +48,7 @@ const Wrapper = styled.button<WrapperProps>`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.9rem 1.8rem;
-    background-color: ${theme.colors.button.primary};
-    color: ${theme.colors.button.primaryText};
     font-weight: 700;
-    font-size: 1.3rem;
-    line-height: 2.3rem;
     border-radius: 3em;
     border: 0;
     cursor: pointer;

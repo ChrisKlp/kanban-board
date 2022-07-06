@@ -29,6 +29,10 @@ const theme = {
       destructiveHover: colors.red300,
       destructiveText: colors.white,
     },
+    text: {
+      dark: colors.grey800,
+      grey: colors.grey600,
+    },
   },
   font: {
     family: 'Plus Jakarta Sans, sans-serif',

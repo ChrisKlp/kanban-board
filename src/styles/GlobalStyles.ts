@@ -12,7 +12,7 @@ ${({ theme }) => css`
 
   body {
     min-width: 28rem;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: ${theme.font.family};
     font-size: 1.3rem;
     background-color: ${theme.colors.bg};
   }

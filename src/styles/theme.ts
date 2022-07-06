@@ -18,6 +18,20 @@ const colors = {
 const theme = {
   colors: {
     bg: colors.grey100,
+    button: {
+      primary: colors.purple500,
+      primaryHover: colors.purple300,
+      primaryText: colors.white,
+      secondary: colors.purple500_10,
+      secondaryHover: colors.purple500_25,
+      secondaryText: colors.purple500,
+      destructive: colors.red500,
+      destructiveHover: colors.red300,
+      destructiveText: colors.white,
+    },
+  },
+  font: {
+    family: 'Plus Jakarta Sans, sans-serif',
   },
   media: {
     sm: '@media (min-width: 576px)',

@@ -30,8 +30,8 @@ const theme = {
       destructiveText: colors.white,
     },
     text: {
-      dark: colors.grey800,
-      grey: colors.grey600,
+      primary: colors.grey800,
+      secondary: colors.grey600,
     },
   },
   font: {

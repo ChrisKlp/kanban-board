@@ -10,16 +10,16 @@ describe('<Text/>', () => {
     });
   });
 
-  it('should render dark variant by default', () => {
+  it('should render primary variant by default', () => {
     const { container } = render(<Text>This board is empty</Text>);
     expect(container.firstChild).toHaveStyle({
       color: '#2B2C37',
     });
   });
 
-  it('should render the large size and grey variant', () => {
+  it('should render the large size and secondary variant', () => {
     const { container } = render(
-      <Text size="large" variant="grey">
+      <Text size="large" variant="secondary">
         This board is empty
       </Text>
     );

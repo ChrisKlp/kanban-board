@@ -17,11 +17,11 @@ const textSizes = {
 };
 
 const textVariants = {
-  dark: (theme: DefaultTheme) => css`
-    color: ${theme.colors.text.dark};
+  primary: (theme: DefaultTheme) => css`
+    color: ${theme.colors.text.primary};
   `,
-  grey: (theme: DefaultTheme) => css`
-    color: ${theme.colors.text.grey};
+  secondary: (theme: DefaultTheme) => css`
+    color: ${theme.colors.text.secondary};
   `,
 };
 

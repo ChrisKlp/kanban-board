@@ -17,7 +17,10 @@ const colors = {
 
 const theme = {
   colors: {
-    bg: colors.grey100,
+    ...colors,
+    bg: {
+      mainBg: colors.grey100,
+    },
     button: {
       primary: colors.purple500,
       primaryHover: colors.purple300,
@@ -28,6 +31,14 @@ const theme = {
       destructive: colors.red500,
       destructiveHover: colors.red300,
       destructiveText: colors.white,
+    },
+    subtask: {
+      bg: colors.grey100,
+      bgHover: colors.purple500_25,
+      checkbox: colors.white,
+      checkboxActive: colors.purple500,
+      label: colors.black,
+      labelActive: `${colors.black}50`,
     },
     text: {
       primary: colors.grey800,
@@ -42,6 +53,10 @@ const theme = {
     md: '@media (min-width: 768px)',
     lg: '@media (min-width: 1050px)',
     xl: '@media (min-width: 1440px)',
+  },
+  transition: {
+    default: '0.3s ease-in-out',
+    fast: '0.1s ease-in-out',
   },
 };
 

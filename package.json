@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
@@ -60,17 +60,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jest-environment-jsdom": "^28.1.2",
+    "jest-transform-stub": "^2.0.0",
     "prettier": "^2.7.1"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.ts"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
   },
   "babel": {
     "presets": [

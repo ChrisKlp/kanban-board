@@ -27,5 +27,6 @@
     "react/require-default-props": ["off"],
     "@typescript-eslint/no-unused-vars": ["warn"],
     "import/no-cycle": ["off"]
-  }
+  },
+  "ignorePatterns": ["jest.config.js"]
 }

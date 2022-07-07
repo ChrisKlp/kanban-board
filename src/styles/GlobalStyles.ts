@@ -14,7 +14,7 @@ ${({ theme }) => css`
     min-width: 28rem;
     font-family: ${theme.font.family};
     font-size: 1.3rem;
-    background-color: ${theme.colors.bg};
+    background-color: ${theme.colors.bg.mainBg};
   }
 `}
 

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import iconCheck from 'assets/icon-check.svg';
 import Text from 'components/Text';
-import { SubtaskProps } from '.';
 
 export const Checkbox = styled.span`
   ${({ theme }) => css`
@@ -20,7 +19,7 @@ export const Label = styled(Text)`
   `};
 `;
 
-export const Wrapper = styled.button<Pick<SubtaskProps, 'checked'>>`
+export const Wrapper = styled.div<{ checked: boolean }>`
   ${({ theme, checked }) => css`
     padding: 1.2rem;
     display: flex;

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import iconCheck from 'assets/icon-check.svg';
+import Text from 'components/Text';
 import { SubtaskProps } from '.';
 
 export const Checkbox = styled.span`
@@ -13,11 +14,8 @@ export const Checkbox = styled.span`
   `};
 `;
 
-export const Label = styled.span`
+export const Label = styled(Text)`
   ${({ theme }) => css`
-    font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
     color: ${theme.colors.subtask.label};
   `};
 `;

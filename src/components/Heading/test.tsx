@@ -13,7 +13,7 @@ describe('<Heading/>', () => {
   it('should render primary variant by default', () => {
     const { container } = render(<Heading>This board is empty</Heading>);
     expect(container.firstChild).toHaveStyle({
-      color: '#2B2C37',
+      color: '#000112',
     });
   });
 

@@ -41,7 +41,7 @@ const theme = {
       labelActive: `${colors.black}50`,
     },
     text: {
-      primary: colors.grey800,
+      primary: colors.black,
       secondary: colors.grey600,
     },
   },

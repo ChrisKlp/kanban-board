@@ -5,16 +5,18 @@ export type TextProps = {
   variant?: 'primary' | 'secondary';
   children: React.ReactNode;
   as?: React.ElementType;
+  className?: string;
 };
 
 function Text({
+  className,
   children,
   as,
   size = 'medium',
   variant = 'primary',
 }: TextProps) {
   return (
-    <Wrapper as={as} size={size} variant={variant}>
+    <Wrapper as={as} size={size} variant={variant} className={className}>
       {children}
     </Wrapper>
   );

@@ -13,7 +13,7 @@ describe('<Text/>', () => {
   it('should render primary variant by default', () => {
     const { container } = render(<Text>This board is empty</Text>);
     expect(container.firstChild).toHaveStyle({
-      color: '#2B2C37',
+      color: '#000112',
     });
   });
 

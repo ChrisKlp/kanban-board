@@ -7,16 +7,17 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
-    padding: 0.8rem 1.6rem 0.9rem;
+    padding: 0 1.6rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 1.6rem;
     width: 100%;
+    height: 4rem;
     border: 1px solid
       ${isOpen ? theme.colors.purple500 : `${theme.colors.grey600}25`};
     border-radius: 0.4rem;
-    background-color: ${theme.colors.subtask.checkbox};
+    background-color: ${theme.colors.bg.primary};
     cursor: pointer;
     transition: border ${theme.transition.fast};
 
@@ -45,7 +46,7 @@ export const Content = styled.ul`
     padding: 1.6rem 0.8rem;
     display: grid;
     gap: 0.8rem;
-    background-color: ${theme.colors.subtask.checkbox};
+    background-color: ${theme.colors.bg.primary};
     border-radius: 0.8rem;
     animation: ${fadeIn} ${theme.transition.fast};
   `};

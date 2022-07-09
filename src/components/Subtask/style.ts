@@ -8,7 +8,7 @@ export const Checkbox = styled.span`
     width: 1.6rem;
     height: 1.6rem;
     border: 1px solid ${theme.colors.grey600}25;
-    background-color: ${theme.colors.subtask.checkbox};
+    background-color: ${theme.colors.bg.primary};
     border-radius: 0.2rem;
   `};
 `;

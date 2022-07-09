@@ -19,7 +19,8 @@ const theme = {
   colors: {
     ...colors,
     bg: {
-      mainBg: colors.grey100,
+      primary: colors.white,
+      body: colors.grey600,
     },
     button: {
       primary: colors.purple500,
@@ -35,7 +36,6 @@ const theme = {
     subtask: {
       bg: colors.grey100,
       bgHover: colors.purple500_25,
-      checkbox: colors.white,
       checkboxActive: colors.purple500,
       label: colors.black,
       labelActive: `${colors.black}50`,

@@ -31,7 +31,7 @@ const headingVariants = {
   `,
 };
 
-const Wrapper = styled.span<WrapperProps>`
+const Wrapper = styled.p<WrapperProps>`
   ${({ theme, size, variant }) => css`
     font-weight: 700;
 

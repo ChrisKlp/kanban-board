@@ -45,6 +45,7 @@ export const Input = styled.input`
     ${text}
     font-family: inherit;
     color: ${theme.colors.text.primary};
+    background-color: transparent;
     outline: none;
     border: none;
 

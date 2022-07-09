@@ -15,12 +15,12 @@ const colors = {
   red300: '#FF9898',
 };
 
-const theme = {
+const themeLight = {
   colors: {
     ...colors,
     bg: {
       primary: colors.white,
-      body: colors.grey600,
+      body: colors.grey100,
     },
     button: {
       primary: colors.purple500,
@@ -33,12 +33,14 @@ const theme = {
       destructiveHover: colors.red300,
       destructiveText: colors.white,
     },
+    dropdown: {
+      content: colors.white,
+      optionHover: colors.grey100,
+    },
     subtask: {
       bg: colors.grey100,
       bgHover: colors.purple500_25,
-      checkboxActive: colors.purple500,
-      label: colors.black,
-      labelActive: `${colors.black}50`,
+      checkboxChecked: colors.purple500,
     },
     text: {
       primary: colors.black,
@@ -60,5 +62,33 @@ const theme = {
   },
 };
 
-export default theme;
-export type ThemeType = typeof theme;
+export const themeDark = {
+  ...themeLight,
+  colors: {
+    ...themeLight.colors,
+    bg: {
+      primary: colors.grey800,
+      body: colors.grey900,
+    },
+    button: {
+      ...themeLight.colors.button,
+      secondary: colors.white,
+      secondaryHover: colors.grey100,
+    },
+    dropdown: {
+      content: colors.grey900,
+      optionHover: colors.grey800,
+    },
+    subtask: {
+      ...themeLight.colors.subtask,
+      bg: colors.grey900,
+    },
+    text: {
+      ...themeLight.colors.text,
+      primary: colors.white,
+    },
+  },
+};
+
+export default themeLight;
+export type ThemeType = typeof themeLight;

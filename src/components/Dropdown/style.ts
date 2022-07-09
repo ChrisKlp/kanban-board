@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
+  position: relative;
   width: 100%;
   max-width: 48rem;
 `;
@@ -8,7 +9,6 @@ export const Wrapper = styled.div`
 export const Title = styled.div<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
     padding: 0 1.6rem;
-    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 1.6rem;
@@ -43,12 +43,18 @@ const fadeIn = keyframes`
 
 export const Content = styled.ul`
   ${({ theme }) => css`
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 1rem;
     padding: 1.6rem 0.8rem;
     display: grid;
     gap: 0.8rem;
-    background-color: ${theme.colors.bg.primary};
+    background-color: ${theme.colors.dropdown.content};
     border-radius: 0.8rem;
     animation: ${fadeIn} ${theme.transition.fast};
+    z-index: 10;
   `};
 `;
 
@@ -63,7 +69,7 @@ export const Option = styled.li`
     transition: background-color ${theme.transition.fast};
 
     &:hover {
-      background-color: ${theme.colors.grey100};
+      background-color: ${theme.colors.dropdown.optionHover};
     }
   `};
 `;

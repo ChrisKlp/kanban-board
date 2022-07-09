@@ -15,7 +15,7 @@ export const Checkbox = styled.span`
 
 export const Label = styled(Text)`
   ${({ theme }) => css`
-    color: ${theme.colors.subtask.label};
+    color: ${theme.colors.text.primary};
   `};
 `;
 
@@ -39,12 +39,12 @@ export const Wrapper = styled.div<{ checked: boolean }>`
     ${!!checked &&
     css`
       ${Label} {
-        color: ${theme.colors.subtask.labelActive};
         text-decoration: line-through;
+        opacity: 0.5;
       }
 
       ${Checkbox} {
-        background-color: ${theme.colors.subtask.checkboxActive};
+        background-color: ${theme.colors.subtask.checkboxChecked};
         border: none;
 
         &::after {

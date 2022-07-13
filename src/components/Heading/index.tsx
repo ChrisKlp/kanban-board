@@ -5,16 +5,18 @@ export type HeadingProps = {
   variant?: 'primary' | 'secondary';
   children: React.ReactNode;
   as?: React.ElementType;
+  className?: string;
 };
 
 function Heading({
+  className,
   children,
   as,
   size = 'large',
   variant = 'primary',
 }: HeadingProps) {
   return (
-    <Wrapper as={as} size={size} variant={variant}>
+    <Wrapper className={className} as={as} size={size} variant={variant}>
       {children}
     </Wrapper>
   );

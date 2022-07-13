@@ -7,6 +7,7 @@ const headingSizes = {
   small: () => css`
     font-size: 1.2rem;
     line-height: 1.5rem;
+    letter-spacing: 0.24rem;
   `,
   medium: () => css`
     font-size: 1.5rem;

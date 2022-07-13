@@ -34,7 +34,8 @@ describe('<Subtask/>', () => {
       backgroundColor: '#635FC7',
     });
     expect(text).toHaveStyle({
-      color: '#00011250',
+      color: '#000112',
+      opacity: 0.5,
       textDecoration: 'line-through',
     });
   });

@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen } from 'utils/test-utils';
-import Dropdown from '.';
+import Select from '.';
 import mock from './mock';
 
 let title: HTMLElement;
@@ -12,7 +12,7 @@ describe('<Dropdown>', () => {
   beforeEach(() => {
     onSelect = jest.fn();
     const utils = render(
-      <Dropdown title={mock.title} options={mock.options} onSelect={onSelect} />
+      <Select title={mock.title} options={mock.options} onSelect={onSelect} />
     );
     titleText = utils.getByText(/select status/i);
     title = titleText.parentElement!;

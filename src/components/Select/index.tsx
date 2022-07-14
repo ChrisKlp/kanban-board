@@ -4,13 +4,13 @@ import Text from 'components/Text';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 import * as S from './style';
 
-type DropdownProps = {
+type SelectProps = {
   title: string;
   options: string[];
   onSelect?: (option: string) => void;
 };
 
-function Dropdown({ title, options, onSelect }: DropdownProps) {
+function Select({ title, options, onSelect }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(title);
   const ref = useRef(null);
@@ -46,4 +46,4 @@ function Dropdown({ title, options, onSelect }: DropdownProps) {
   );
 }
 
-export default Dropdown;
+export default Select;

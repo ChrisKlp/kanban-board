@@ -51,7 +51,7 @@ export const Content = styled.ul`
     padding: 1.6rem 0.8rem;
     display: grid;
     gap: 0.8rem;
-    background-color: ${theme.colors.dropdown.content};
+    background-color: ${theme.colors.select.content};
     border-radius: 0.8rem;
     animation: ${fadeIn} ${theme.transition.fast};
     z-index: 10;
@@ -69,7 +69,7 @@ export const Option = styled.li`
     transition: background-color ${theme.transition.fast};
 
     &:hover {
-      background-color: ${theme.colors.dropdown.optionHover};
+      background-color: ${theme.colors.select.optionHover};
     }
   `};
 `;

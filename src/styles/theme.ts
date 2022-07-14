@@ -31,13 +31,13 @@ const themeLight = {
       destructiveHover: colors.red300,
       destructiveText: colors.white,
     },
-    dropdown: {
-      content: colors.white,
-      optionHover: colors.grey100,
-    },
     navigation: {
       itemHover: `${colors.purple500}10`,
       border: colors.grey200,
+    },
+    select: {
+      content: colors.white,
+      optionHover: colors.grey100,
     },
     subtask: {
       bg: colors.grey100,
@@ -80,13 +80,13 @@ export const themeDark = {
       secondary: colors.white,
       secondaryHover: colors.grey100,
     },
-    dropdown: {
-      content: colors.grey900,
-      optionHover: colors.grey800,
-    },
     navigation: {
       itemHover: colors.white,
       border: colors.grey700,
+    },
+    select: {
+      content: colors.grey900,
+      optionHover: colors.grey800,
     },
     subtask: {
       ...themeLight.colors.subtask,

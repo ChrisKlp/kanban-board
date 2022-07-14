@@ -9,8 +9,6 @@ const colors = {
   black: '#000112',
   purple300: '#A8A4FF',
   purple500: '#635FC7',
-  purple500_10: '#635FC710',
-  purple500_25: '#635FC725',
   red500: '#EA5555',
   red300: '#FF9898',
 };
@@ -26,8 +24,8 @@ const themeLight = {
       primary: colors.purple500,
       primaryHover: colors.purple300,
       primaryText: colors.white,
-      secondary: colors.purple500_10,
-      secondaryHover: colors.purple500_25,
+      secondary: `${colors.purple500}10`,
+      secondaryHover: `${colors.purple500}25`,
       secondaryText: colors.purple500,
       destructive: colors.red500,
       destructiveHover: colors.red300,
@@ -37,9 +35,12 @@ const themeLight = {
       content: colors.white,
       optionHover: colors.grey100,
     },
+    navigation: {
+      itemHover: `${colors.purple500}10`,
+    },
     subtask: {
       bg: colors.grey100,
-      bgHover: colors.purple500_25,
+      bgHover: `${colors.purple500}25`,
       checkboxChecked: colors.purple500,
     },
     text: {
@@ -51,10 +52,13 @@ const themeLight = {
     family: 'Plus Jakarta Sans, sans-serif',
   },
   media: {
-    sm: '@media (min-width: 576px)',
-    md: '@media (min-width: 768px)',
-    lg: '@media (min-width: 1050px)',
-    xl: '@media (min-width: 1440px)',
+    sm: 'min-width: 576px',
+    md: 'min-width: 768px',
+    lg: 'min-width: 1050px',
+    xl: 'min-width: 1440px',
+  },
+  shadow: {
+    primary: '0px 10px 20px rgba(54, 78, 126, 0.25)',
   },
   transition: {
     default: '0.3s ease-in-out',
@@ -78,6 +82,9 @@ export const themeDark = {
     dropdown: {
       content: colors.grey900,
       optionHover: colors.grey800,
+    },
+    navigation: {
+      itemHover: colors.white,
     },
     subtask: {
       ...themeLight.colors.subtask,

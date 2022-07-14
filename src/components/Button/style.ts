@@ -14,6 +14,13 @@ const buttonSizes = {
     font-size: 1.5rem;
     line-height: 1.9rem;
   `,
+  icon: (theme: DefaultTheme) => css`
+    padding: 1rem 1.8rem;
+
+    @media (${theme.media.md}) {
+      padding: 1.5rem 2.4rem 1.4rem;
+    }
+  `,
 };
 
 const buttonVariants = {
@@ -54,7 +61,7 @@ const Wrapper = styled.button<WrapperProps>`
     cursor: pointer;
     transition: background-color 0.2s;
 
-    ${!!size && buttonSizes[size]}
+    ${!!size && buttonSizes[size](theme)}
     ${!!variant && buttonVariants[variant](theme)}
   `};
 `;

@@ -13,9 +13,14 @@ const headingSizes = {
     font-size: 1.5rem;
     line-height: 1.9rem;
   `,
-  large: () => css`
+  large: (theme: DefaultTheme) => css`
     font-size: 1.8rem;
     line-height: 2.3rem;
+
+    @media (${theme.media.md}) {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
   `,
   xlarge: () => css`
     font-size: 2.4rem;
@@ -32,11 +37,11 @@ const headingVariants = {
   `,
 };
 
-const Wrapper = styled.p<WrapperProps>`
+const Wrapper = styled.span<WrapperProps>`
   ${({ theme, size, variant }) => css`
     font-weight: 700;
 
-    ${!!size && headingSizes[size]}
+    ${!!size && headingSizes[size](theme)}
     ${!!variant && headingVariants[variant](theme)}
   `};
 `;

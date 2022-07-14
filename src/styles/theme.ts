@@ -37,6 +37,7 @@ const themeLight = {
     },
     navigation: {
       itemHover: `${colors.purple500}10`,
+      border: colors.grey200,
     },
     subtask: {
       bg: colors.grey100,
@@ -85,6 +86,7 @@ export const themeDark = {
     },
     navigation: {
       itemHover: colors.white,
+      border: colors.grey700,
     },
     subtask: {
       ...themeLight.colors.subtask,

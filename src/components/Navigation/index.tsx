@@ -1,10 +1,10 @@
-import Heading from 'components/Heading';
-import iconDark from 'assets/icon-dark-theme.svg';
-import iconLight from 'assets/icon-light-theme.svg';
 import iconBoard from 'assets/icon-board.svg';
+import iconDark from 'assets/icon-dark-theme.svg';
 import iconHideSidebar from 'assets/icon-hide-sidebar.svg';
+import iconLight from 'assets/icon-light-theme.svg';
+import Heading from 'components/Heading';
+import { ForwardedRef, forwardRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
-import { useState } from 'react';
 import * as S from './style';
 
 type NavigationProps = {
@@ -13,17 +13,24 @@ type NavigationProps = {
     name: string;
     active: boolean;
   }[];
+  className?: string;
+  mobile?: boolean;
   onThemeToggle?: (isOn: boolean) => void;
   onNavClick?: (id: number) => void;
   onButtonClick?: () => void;
 };
 
-function Navigation({
-  data,
-  onThemeToggle,
-  onNavClick,
-  onButtonClick,
-}: NavigationProps) {
+function Navigation(
+  {
+    data,
+    onThemeToggle,
+    onNavClick,
+    onButtonClick,
+    className,
+    mobile,
+  }: NavigationProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   const [isOn, setIsOn] = useState(false);
   const [navList, setNavList] = useState(data);
 
@@ -42,7 +49,7 @@ function Navigation({
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className} ref={ref} mobile={mobile}>
       <S.NavWrapper>
         <Heading
           as="h4"
@@ -83,4 +90,4 @@ function Navigation({
   );
 }
 
-export default Navigation;
+export default forwardRef<HTMLDivElement, NavigationProps>(Navigation);

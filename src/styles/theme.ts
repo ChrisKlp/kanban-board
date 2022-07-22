@@ -62,7 +62,7 @@ const themeLight = {
     primary: '0px 10px 20px rgba(54, 78, 126, 0.25)',
   },
   transition: {
-    default: '0.3s ease-in-out',
+    default: '0.2s ease-in-out',
     fast: '0.1s ease-in-out',
   },
 };

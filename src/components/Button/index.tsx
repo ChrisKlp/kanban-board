@@ -12,9 +12,15 @@ function Button({
   size = 'small',
   variant = 'primary',
   className,
+  disabled,
 }: ButtonProps) {
   return (
-    <Wrapper className={className} size={size} variant={variant}>
+    <Wrapper
+      className={className}
+      size={size}
+      variant={variant}
+      disabled={disabled}
+    >
       {children}
     </Wrapper>
   );

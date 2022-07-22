@@ -1,12 +1,33 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
-export const Wrapper = styled.nav`
-  ${({ theme }) => css`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+`;
+
+export const Wrapper = styled.nav<{ mobile?: boolean }>`
+  ${({ theme, mobile }) => css`
+    position: absolute;
     display: grid;
+    margin-top: 1.6rem;
+    left: 5.6rem;
+    right: 5.6rem;
+    min-width: 22rem;
     padding: 1.6rem 0;
     background-color: ${theme.colors.bg.primary};
     border-radius: 0.8rem;
     box-shadow: ${theme.shadow.primary};
+    animation: ${fadeIn} ${theme.transition.default};
+    z-index: 10;
+
+    ${mobile &&
+    css`
+      @media (${theme.media.md}) {
+        display: none;
+      }
+    `}
   `};
 `;
 
@@ -41,7 +62,7 @@ export const NavItem = styled.li<{ active?: boolean }>`
       transition: color ${theme.transition.fast};
     }
     & svg path {
-      fill: ${theme.colors.grey600};
+      fill: ${active ? theme.colors.white : theme.colors.grey600};
       transition: fill ${theme.transition.fast};
     }
 

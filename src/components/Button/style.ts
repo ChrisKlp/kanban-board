@@ -16,6 +16,8 @@ const buttonSizes = {
   `,
   icon: (theme: DefaultTheme) => css`
     padding: 1rem 1.8rem;
+    font-size: 1.5rem;
+    line-height: 1.9rem;
 
     @media (${theme.media.md}) {
       padding: 1.5rem 2.4rem 1.4rem;
@@ -51,7 +53,7 @@ const buttonVariants = {
 };
 
 const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, variant }) => css`
+  ${({ theme, size, variant, disabled }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -63,6 +65,11 @@ const Wrapper = styled.button<WrapperProps>`
 
     ${!!size && buttonSizes[size](theme)}
     ${!!variant && buttonVariants[variant](theme)}
+    ${disabled &&
+    css`
+      opacity: 0.25;
+      pointer-events: none;
+    `}
   `};
 `;
 

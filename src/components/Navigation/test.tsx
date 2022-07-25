@@ -6,14 +6,12 @@ import navData from './mock';
 function renderNavigation() {
   const onButtonClick = jest.fn();
   const onNavClick = jest.fn();
-  const onThemeToggle = jest.fn();
 
   const utils = render(
     <Navigation
       data={navData}
       onButtonClick={onButtonClick}
       onNavClick={onNavClick}
-      onThemeToggle={onThemeToggle}
     />
   );
 
@@ -32,7 +30,6 @@ function renderNavigation() {
     button,
     sideBarButton,
     themeSwitch,
-    onThemeToggle,
     onNavClick,
     onButtonClick,
   };
@@ -75,13 +72,5 @@ describe('<Navigation />', () => {
     userEvent.click(navList.lastElementChild!);
     expect(onNavClick).toBeCalled();
     expect(onNavClick).toBeCalledTimes(1);
-  });
-
-  it('should call func on theme switch press', () => {
-    const { themeSwitch, onThemeToggle } = renderNavigation();
-
-    userEvent.click(themeSwitch);
-    expect(onThemeToggle).toBeCalled();
-    expect(onThemeToggle).toBeCalledTimes(1);
   });
 });

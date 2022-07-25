@@ -1,34 +1,9 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-`;
-
-export const Wrapper = styled.nav<{ mobile?: boolean }>`
-  ${({ theme, mobile }) => css`
-    position: absolute;
-    display: grid;
-    margin-top: 1.6rem;
-    left: 5.6rem;
-    right: 5.6rem;
-    min-width: 22rem;
-    padding: 1.6rem 0;
-    background-color: ${theme.colors.bg.primary};
-    border-radius: 0.8rem;
-    box-shadow: ${theme.shadow.primary};
-    animation: ${fadeIn} ${theme.transition.default};
-    z-index: 10;
-
-    ${mobile &&
-    css`
-      @media (${theme.media.md}) {
-        display: none;
-      }
-    `}
-  `};
+export const Wrapper = styled.div`
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  padding: 1.6rem 0;
 `;
 
 export const NavWrapper = styled.div`

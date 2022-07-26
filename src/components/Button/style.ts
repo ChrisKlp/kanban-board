@@ -62,6 +62,7 @@ const Wrapper = styled.button<WrapperProps>`
     border: 0;
     cursor: pointer;
     transition: background-color 0.2s;
+    white-space: nowrap;
 
     ${!!size && buttonSizes[size](theme)}
     ${!!variant && buttonVariants[variant](theme)}

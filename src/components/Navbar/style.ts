@@ -7,7 +7,7 @@ const fadeIn = keyframes`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.header`
   ${({ theme }) => css`
     position: relative;
     padding: 0 1.6rem;
@@ -29,8 +29,8 @@ export const Wrapper = styled.div`
   `};
 `;
 
-export const LogoWrapper = styled.div`
-  ${({ theme }) => css`
+export const LogoWrapper = styled.div<{ hidden: boolean }>`
+  ${({ theme, hidden }) => css`
     padding-right: 1.6rem;
     display: flex;
     align-items: center;
@@ -56,6 +56,11 @@ export const LogoWrapper = styled.div`
     @media (${theme.media.lg}) {
       padding-right: 3.2rem;
     }
+
+    ${hidden &&
+    css`
+      display: none;
+    `}
   `};
 `;
 
@@ -123,38 +128,22 @@ export const NewTaskButton = styled(Button).attrs({
   `};
 `;
 
-export const ContextMenuButton = styled.button`
-  ${({ theme }) => css`
-    position: relative;
-    margin-left: 0.6rem;
-    margin-right: -1rem;
-    padding: 0 1rem;
-    cursor: pointer;
-
-    @media (${theme.media.md}) {
-      margin-left: 1.4rem;
-    }
-
-    @media (${theme.media.lg}) {
-      margin-left: 1.4rem;
-      margin-right: -0.2rem;
-    }
-  `};
-`;
-
-export const ContextMenu = styled.span`
+export const NavigationMobileWrapper = styled.nav`
   ${({ theme }) => css`
     position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 3.6rem;
-    padding: 1.6rem;
-    display: grid;
-    gap: 1.6rem;
+    margin-top: 1.6rem;
+    left: 5.6rem;
+    right: 5.6rem;
+    min-width: 22rem;
     background-color: ${theme.colors.bg.primary};
     border-radius: 0.8rem;
-    animation: ${fadeIn} ${theme.transition.fast};
+    box-shadow: ${theme.shadow.primary};
+    animation: ${fadeIn} ${theme.transition.default};
     z-index: 10;
+
+    @media (${theme.media.md}) {
+      display: none;
+    }
   `};
 `;
 

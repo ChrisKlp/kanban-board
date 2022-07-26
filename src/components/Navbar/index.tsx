@@ -11,7 +11,12 @@ import { useState } from 'react';
 import ContextMenu from 'components/ContextMenu';
 import * as S from './style';
 
-function Navbar() {
+type NavbarProps = {
+  isSidebarOpen: boolean;
+};
+
+// eslint-disable-next-line no-empty-pattern
+function Navbar({ isSidebarOpen }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuOpen = () => setIsMenuOpen(!isMenuOpen);
@@ -19,7 +24,7 @@ function Navbar() {
   return (
     <>
       <S.Wrapper>
-        <S.LogoWrapper>
+        <S.LogoWrapper hidden={isSidebarOpen}>
           <img
             src={logoMobile}
             className="mobileLogo"
@@ -47,11 +52,12 @@ function Navbar() {
       </S.Wrapper>
       {isMenuOpen && (
         <>
-          <Navigation
-            data={navData}
-            onNavClick={() => setIsMenuOpen(false)}
-            mobile
-          />
+          <S.NavigationMobileWrapper>
+            <Navigation
+              data={navData}
+              onNavClick={() => setIsMenuOpen(false)}
+            />
+          </S.NavigationMobileWrapper>
           <S.Overlay onClick={() => setIsMenuOpen(false)} />
         </>
       )}

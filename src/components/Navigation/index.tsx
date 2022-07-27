@@ -5,6 +5,7 @@ import iconLight from 'assets/icon-light-theme.svg';
 import Heading from 'components/Heading';
 import { ForwardedRef, forwardRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
+import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
 import * as S from './style';
 
@@ -17,21 +18,15 @@ type NavigationProps = {
   className?: string;
   onNavClick?: (id: number) => void;
   onButtonClick?: () => void;
-  onHideSidebarClick?: () => void;
 };
 
 function Navigation(
-  {
-    data,
-    onNavClick,
-    onButtonClick,
-    onHideSidebarClick,
-    className,
-  }: NavigationProps,
+  { data, onNavClick, onButtonClick, className }: NavigationProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const [navList, setNavList] = useState(data);
-  const { isDarkTheme, setDarkTheme } = useThemeState();
+  const { isDarkTheme, toggleTheme } = useThemeState();
+  const toggleSidebar = useSidebarState((state) => state.toggleSidebar);
 
   const handleNavClick = (id: number) => {
     setNavList(
@@ -43,7 +38,7 @@ function Navigation(
   };
 
   return (
-    <S.Wrapper className={className} ref={ref}>
+    <S.Wrapper className={className} ref={ref} data-testid="navWrapper">
       <S.NavWrapper>
         <Heading
           as="h4"
@@ -72,11 +67,11 @@ function Navigation(
         <S.ThemeSwitch
           aria-label="Theme Switch"
           isOn={isDarkTheme}
-          onClick={setDarkTheme}
+          onClick={toggleTheme}
         />
         <img src={iconDark} alt="theme dark icon" />
       </S.ThemeWrapper>
-      <S.NavButton onClick={onHideSidebarClick}>
+      <S.NavButton onClick={toggleSidebar}>
         <ReactSVG src={iconHideSidebar} />
         <span>Hide Sidebar</span>
       </S.NavButton>

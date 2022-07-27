@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
-import { SidebarProps } from '.';
 
-export const Wrapper = styled.nav<Pick<SidebarProps, 'isSidebarOpen'>>`
-  ${({ theme, isSidebarOpen }) => css`
+export const Wrapper = styled.nav<{ isOpen: boolean }>`
+  ${({ theme, isOpen }) => css`
     position: fixed;
     top: 0;
     bottom: 0;
@@ -15,7 +14,7 @@ export const Wrapper = styled.nav<Pick<SidebarProps, 'isSidebarOpen'>>`
     z-index: 100;
 
     @media (${theme.media.md}) {
-      display: ${isSidebarOpen ? 'grid' : 'none'};
+      display: ${isOpen ? 'grid' : 'none'};
       grid-template-rows: auto 1fr;
     }
   `};

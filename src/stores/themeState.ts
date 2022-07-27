@@ -3,14 +3,14 @@ import { devtools } from 'zustand/middleware';
 
 type TThemeState = {
   isDarkTheme: boolean;
-  setDarkTheme: () => void;
+  toggleTheme: () => void;
 };
 
 const useThemeState = create<TThemeState>()(
   devtools((set) => ({
     isDarkTheme: false,
 
-    setDarkTheme: () => set((s) => ({ isDarkTheme: !s.isDarkTheme })),
+    toggleTheme: () => set((s) => ({ isDarkTheme: !s.isDarkTheme })),
   }))
 );
 

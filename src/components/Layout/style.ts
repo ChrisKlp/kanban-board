@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 import iconShowSidebar from 'assets/icon-show-sidebar.svg';
 
-export const Wrapper = styled.div``;
-
-export const Content = styled.div<{ isSidebarOpen: boolean }>`
-  ${({ theme, isSidebarOpen }) => css`
+export const Wrapper = styled.div`
+  position: relative;
+`;
+export const Content = styled.div<{ isOpen: boolean }>`
+  ${({ theme, isOpen }) => css`
     @media (${theme.media.md}) {
-      margin-left: ${isSidebarOpen ? '26rem' : 0};
+      margin-left: ${isOpen ? '26rem' : 0};
     }
   `};
 `;

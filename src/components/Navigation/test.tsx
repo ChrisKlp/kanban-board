@@ -15,7 +15,7 @@ function renderNavigation() {
     />
   );
 
-  const wrapper = utils.getByRole('navigation');
+  const wrapper = utils.getByTestId('navWrapper');
   const heading = utils.getByText(/All Boards/i);
   const navList = utils.getByRole('list');
   const button = utils.getByText('+ Create New Board');

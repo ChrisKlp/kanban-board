@@ -1,6 +1,9 @@
+import logoDark from 'assets/logo-dark.svg';
+import logoLight from 'assets/logo-light.svg';
+import logoMobile from 'assets/logo-mobile.svg';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
-import { useState } from 'react';
+import useSidebarState from 'stores/sidebarState';
 import * as S from './style';
 
 type LayoutProps = {
@@ -8,15 +11,13 @@ type LayoutProps = {
 };
 
 function Layout({ children }: LayoutProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const { isOpen, toggleSidebar } = useSidebarState();
 
   return (
     <S.Wrapper>
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <S.Content isSidebarOpen={isSidebarOpen}>
-        <Navbar isSidebarOpen={isSidebarOpen} />
+      <Sidebar />
+      <S.Content isOpen={isOpen}>
+        <Navbar />
         <main>{children}</main>
       </S.Content>
       <S.SidebarToggle onClick={toggleSidebar} />

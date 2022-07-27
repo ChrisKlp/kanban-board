@@ -7,19 +7,28 @@ import logoMobile from 'assets/logo-mobile.svg';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
 import navData from 'components/Navigation/mock';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ContextMenu from 'components/ContextMenu';
+import useSidebarState from 'stores/sidebarState';
+import useThemeState from 'stores/themeState';
+import useMediaQuery from 'hooks/useMediaQuery';
 import * as S from './style';
 
-type NavbarProps = {
-  isSidebarOpen: boolean;
-};
-
-// eslint-disable-next-line no-empty-pattern
-function Navbar({ isSidebarOpen }: NavbarProps) {
+function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
+  const isDarkTheme = useThemeState((state) => state.isDarkTheme);
+
+  const isTablet = useMediaQuery('(min-width: 768px)');
 
   const handleMenuOpen = () => setIsMenuOpen(!isMenuOpen);
+
+  useEffect(() => {
+    if (!isTablet && isSidebarOpen) {
+      console.log('jazda');
+      toggleSidebar();
+    }
+  }, [isSidebarOpen, isTablet, toggleSidebar]);
 
   return (
     <>
@@ -30,7 +39,11 @@ function Navbar({ isSidebarOpen }: NavbarProps) {
             className="mobileLogo"
             alt="Kanban logo mobile"
           />
-          <img src={logoDark} className="desktopLogo" alt="Kanban logo" />
+          <img
+            src={isDarkTheme ? logoLight : logoDark}
+            className="desktopLogo"
+            alt="Kanban logo"
+          />
         </S.LogoWrapper>
         <S.ContentWrapper>
           <S.NavDropdown onClick={handleMenuOpen}>

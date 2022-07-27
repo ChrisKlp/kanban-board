@@ -2,20 +2,23 @@ import Navigation from 'components/Navigation';
 import data from 'components/Navigation/mock';
 import logoLight from 'assets/logo-light.svg';
 import logoDark from 'assets/logo-dark.svg';
+import useSidebarState from 'stores/sidebarState';
+import useThemeState from 'stores/themeState';
 import * as S from './style';
 
-export type SidebarProps = {
-  isSidebarOpen: boolean;
-  toggleSidebar: () => void;
-};
-
-function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
+function Sidebar() {
+  const isOpen = useSidebarState((state) => state.isOpen);
+  const isDarkTheme = useThemeState((state) => state.isDarkTheme);
   return (
-    <S.Wrapper isSidebarOpen={isSidebarOpen}>
+    <S.Wrapper isOpen={isOpen}>
       <S.LogoWrapper>
-        <img src={logoDark} className="desktopLogo" alt="Kanban logo" />
+        <img
+          src={isDarkTheme ? logoLight : logoDark}
+          className="desktopLogo"
+          alt="Kanban logo"
+        />
       </S.LogoWrapper>
-      <Navigation data={data} onHideSidebarClick={toggleSidebar} />
+      <Navigation data={data} />
     </S.Wrapper>
   );
 }

@@ -31,6 +31,9 @@ const themeLight = {
       destructiveHover: colors.red300,
       destructiveText: colors.white,
     },
+    contextMenu: {
+      bg: colors.white,
+    },
     navigation: {
       itemHover: `${colors.purple500}10`,
       border: colors.grey200,
@@ -79,6 +82,9 @@ export const themeDark = {
       ...themeLight.colors.button,
       secondary: colors.white,
       secondaryHover: colors.grey100,
+    },
+    contextMenu: {
+      bg: colors.grey900,
     },
     navigation: {
       itemHover: colors.white,

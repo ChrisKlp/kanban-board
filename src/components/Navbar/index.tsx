@@ -7,7 +7,7 @@ import logoMobile from 'assets/logo-mobile.svg';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
 import navData from 'components/Navigation/mock';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ContextMenu from 'components/ContextMenu';
 import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
@@ -18,34 +18,32 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
-
   const isTablet = useMediaQuery('(min-width: 768px)');
 
-  const handleMenuOpen = () => setIsMenuOpen(!isMenuOpen);
+  const handleMenuOpen = useCallback(
+    () => setIsMenuOpen(!isMenuOpen),
+    [isMenuOpen]
+  );
+
+  const handleLogo = () => {
+    let logo = logoDark;
+    if (!isTablet) logo = logoMobile;
+    if (isTablet && isDarkTheme) logo = logoLight;
+    return logo;
+  };
 
   useEffect(() => {
-    if (!isTablet && isSidebarOpen) {
-      console.log('jazda');
-      toggleSidebar();
-    }
-  }, [isSidebarOpen, isTablet, toggleSidebar]);
+    if (!isTablet && isSidebarOpen) toggleSidebar();
+    if (isTablet && isMenuOpen) handleMenuOpen();
+  }, [handleMenuOpen, isMenuOpen, isSidebarOpen, isTablet, toggleSidebar]);
 
   return (
     <>
       <S.Wrapper>
-        <S.LogoWrapper hidden={isSidebarOpen}>
-          <img
-            src={logoMobile}
-            className="mobileLogo"
-            alt="Kanban logo mobile"
-          />
-          <img
-            src={isDarkTheme ? logoLight : logoDark}
-            className="desktopLogo"
-            alt="Kanban logo"
-          />
+        <S.LogoWrapper isSidebarOpen={isSidebarOpen}>
+          <img src={handleLogo()} alt="Kanban logo" />
         </S.LogoWrapper>
-        <S.ContentWrapper>
+        <S.ContentWrapper isSidebarOpen={isSidebarOpen}>
           <S.NavDropdown onClick={handleMenuOpen}>
             <Heading>Platform Launch</Heading>
             <img

@@ -1,6 +1,3 @@
-import logoDark from 'assets/logo-dark.svg';
-import logoLight from 'assets/logo-light.svg';
-import logoMobile from 'assets/logo-mobile.svg';
 import Navbar from 'components/Navbar';
 import Sidebar from 'components/Sidebar';
 import useSidebarState from 'stores/sidebarState';

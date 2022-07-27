@@ -45,7 +45,7 @@ export const Content = styled.ul`
     min-width: 19.2rem;
     display: grid;
     gap: 1.6rem;
-    background-color: ${theme.colors.bg.primary};
+    background-color: ${theme.colors.contextMenu.bg};
     border-radius: 0.8rem;
     animation: ${fadeIn} ${theme.transition.fast};
     z-index: 10;

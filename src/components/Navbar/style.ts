@@ -7,7 +7,7 @@ const fadeIn = keyframes`
   }
 `;
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
     padding: 0 1.6rem;
@@ -29,43 +29,31 @@ export const Wrapper = styled.header`
   `};
 `;
 
-export const LogoWrapper = styled.div<{ hidden: boolean }>`
-  ${({ theme, hidden }) => css`
+export const LogoWrapper = styled.div<{ isSidebarOpen: boolean }>`
+  ${({ theme, isSidebarOpen }) => css`
     padding-right: 1.6rem;
     display: flex;
     align-items: center;
     height: 100%;
 
-    & .desktopLogo {
-      display: none;
-    }
-
     @media (${theme.media.md}) {
       padding-right: 2.4rem;
       border-right: 1px solid ${theme.colors.navigation.border};
-
-      & .desktopLogo {
-        display: block;
-      }
-
-      & .mobileLogo {
-        display: none;
-      }
     }
 
     @media (${theme.media.lg}) {
       padding-right: 3.2rem;
     }
 
-    ${hidden &&
+    ${isSidebarOpen &&
     css`
       display: none;
     `}
   `};
 `;
 
-export const ContentWrapper = styled.div`
-  ${({ theme }) => css`
+export const ContentWrapper = styled.div<{ isSidebarOpen: boolean }>`
+  ${({ theme, isSidebarOpen }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,7 +69,7 @@ export const ContentWrapper = styled.div`
     }
 
     @media (${theme.media.md}) {
-      padding-left: 2.4rem;
+      padding-left: ${isSidebarOpen ? 0 : '2.4rem'};
 
       & > h2 {
         display: block;
@@ -139,7 +127,7 @@ export const NavigationMobileWrapper = styled.nav`
     border-radius: 0.8rem;
     box-shadow: ${theme.shadow.primary};
     animation: ${fadeIn} ${theme.transition.default};
-    z-index: 10;
+    z-index: 1;
 
     @media (${theme.media.md}) {
       display: none;

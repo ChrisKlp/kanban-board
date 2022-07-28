@@ -37,3 +37,8 @@ export const SidebarToggle = styled.button`
     }
   `};
 `;
+
+export const MainWrapper = styled.main`
+  padding-left: 1.6rem;
+  padding-top: 2.4rem;
+`;

@@ -8,7 +8,7 @@ type TSidebarState = {
 
 const useSidebarState = create<TSidebarState>()(
   devtools((set) => ({
-    isOpen: false,
+    isOpen: true,
 
     toggleSidebar: () => set((s) => ({ isOpen: !s.isOpen })),
   }))

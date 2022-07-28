@@ -15,7 +15,7 @@ function Layout({ children }: LayoutProps) {
       <Sidebar />
       <S.Content isOpen={isOpen}>
         <Navbar />
-        <main>{children}</main>
+        <S.MainWrapper>{children}</S.MainWrapper>
       </S.Content>
       <S.SidebarToggle onClick={toggleSidebar} />
     </S.Wrapper>

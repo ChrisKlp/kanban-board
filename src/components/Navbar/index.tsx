@@ -26,8 +26,8 @@ function Navbar() {
   );
 
   const handleLogo = () => {
-    let logo = logoDark;
-    if (!isTablet) logo = logoMobile;
+    let logo = logoMobile;
+    if (isTablet) logo = logoDark;
     if (isTablet && isDarkTheme) logo = logoLight;
     return logo;
   };

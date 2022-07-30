@@ -39,16 +39,12 @@ export const LogoWrapper = styled.div<{ isSidebarOpen: boolean }>`
     @media (${theme.media.md}) {
       padding-right: 2.4rem;
       border-right: 1px solid ${theme.colors.navigation.border};
+      display: ${isSidebarOpen ? 'none' : 'flex'};
     }
 
     @media (${theme.media.lg}) {
       padding-right: 3.2rem;
     }
-
-    ${isSidebarOpen &&
-    css`
-      display: none;
-    `}
   `};
 `;
 

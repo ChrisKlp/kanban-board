@@ -1,18 +1,21 @@
 import Heading from 'components/Heading';
 import Text from 'components/Text';
-import { TTaskColumn } from 'models';
+import { TTask } from 'models';
 import * as S from './style';
 
-type TaskColumnProps = {} & TTaskColumn;
+type TaskColumnProps = {
+  name: string;
+  tasks: TTask[];
+};
 
 function TaskColumn({ name, tasks }: TaskColumnProps) {
-  const taskList = tasks.map(({ title, subtasks }) => {
+  const taskList = tasks.map(({ id, title, subtasks }) => {
     const subtasksLength = subtasks.length;
     const completedSubtasksLength = subtasks.filter(
       (subtask) => subtask.isCompleted
     ).length;
     return (
-      <S.Task key={title}>
+      <S.Task key={id}>
         <Heading size="medium">{title}</Heading>
         <Text
           variant="secondary"

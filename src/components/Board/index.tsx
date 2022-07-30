@@ -9,8 +9,8 @@ type BoardProps = {
 function Board({ board }: BoardProps) {
   return (
     <Wrapper>
-      {board.columns.map(({ name, tasks }) => (
-        <TaskColumn key={name} tasks={tasks} name={name} />
+      {board.columns.map(({ id, name, tasks }) => (
+        <TaskColumn key={id} tasks={tasks} name={name} />
       ))}
     </Wrapper>
   );

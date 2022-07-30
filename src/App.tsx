@@ -8,6 +8,7 @@ import data from 'data.json';
 
 function App() {
   const isDarkTheme = useThemeState((s) => s.isDarkTheme);
+
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyles />

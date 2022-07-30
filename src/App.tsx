@@ -1,9 +1,10 @@
-import Heading from 'components/Heading';
+import Board from 'components/Board';
 import Layout from 'components/Layout';
 import useThemeState from 'stores/themeState';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'styles/GlobalStyles';
 import themeLight, { themeDark } from 'styles/theme';
+import data from 'data.json';
 
 function App() {
   const isDarkTheme = useThemeState((s) => s.isDarkTheme);
@@ -11,39 +12,7 @@ function App() {
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyles />
       <Layout>
-        <Heading size="xlarge">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          quas accusamus assumenda similique unde cupiditate velit quidem quod
-          quo dolorem, dignissimos voluptatem aut accusantium numquam vel illo
-          maiores, eum expedita. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Perferendis quas accusamus assumenda similique unde
-          cupiditate velit quidem quod quo dolorem, dignissimos voluptatem aut
-          accusantium numquam vel illo maiores, eum expedita. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Perferendis quas accusamus
-          assumenda similique unde cupiditate velit quidem quod quo dolorem,
-          dignissimos voluptatem aut accusantium numquam vel illo maiores, eum
-          expedita. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Perferendis quas accusamus assumenda similique unde cupiditate velit
-          quidem quod quo dolorem, dignissimos voluptatem aut accusantium
-          numquam vel illo maiores, eum expedita.sit amet consectetur
-          adipisicing elit. Perferendis quas accusamus assumenda similique unde
-          cupiditate velit quidem quod quo dolorem, dignissimos voluptatem aut
-          accusantium numquam vel illo maiores, eum expedita. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Perferendis quas accusamus
-          assumenda similique unde cupiditate velit quidem quod quo dolorem,
-          dignissimos voluptatem aut accusantium numquam vel illo maiores, eum
-          expedita.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Perferendis quas accusamus assumenda similique unde cupiditate velit
-          quidem quod quo dolorem, dignissimos voluptatem aut accusantium
-          numquam vel illo maiores, eum expedita.sit amet consectetur
-          adipisicing elit. Perferendis quas accusamus assumenda similique unde
-          cupiditate velit quidem quod quo dolorem, dignissimos voluptatem aut
-          accusantium numquam vel illo maiores, eum expedita. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Perferendis quas accusamus
-          assumenda similique unde cupiditate velit quidem quod quo dolorem,
-          dignissimos voluptatem aut accusantium numquam vel illo maiores, eum
-          expedita.
-        </Heading>
+        <Board board={data.boards[0]} />
       </Layout>
     </ThemeProvider>
   );

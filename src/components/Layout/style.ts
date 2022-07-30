@@ -43,6 +43,5 @@ export const SidebarToggle = styled.button`
 
 export const MainWrapper = styled.main`
   overflow: auto;
-  /* padding-left: 1.6rem; */
-  /* padding-top: 2.4rem; */
+  padding: 1.6rem 2.4rem;
 `;

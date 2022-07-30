@@ -1,28 +1,30 @@
 import Heading from 'components/Heading';
 import Text from 'components/Text';
+import { TTaskColumn } from 'models';
 import * as S from './style';
-import data from './mock';
 
-function TaskColumn() {
-  const taskList = data.map(({ id, name, substasks }) => {
-    const substasksLength = substasks.length;
-    const completedSubstasksLength = substasks.filter(
-      (task) => task.completed
+type TaskColumnProps = {} & TTaskColumn;
+
+function TaskColumn({ name, tasks }: TaskColumnProps) {
+  const taskList = tasks.map(({ title, subtasks }) => {
+    const subtasksLength = subtasks.length;
+    const completedSubtasksLength = subtasks.filter(
+      (subtask) => subtask.isCompleted
     ).length;
     return (
-      <S.Task key={id}>
-        <Heading size="medium">{name}</Heading>
+      <S.Task key={title}>
+        <Heading size="medium">{title}</Heading>
         <Text
           variant="secondary"
           as="span"
-        >{`${completedSubstasksLength} of ${substasksLength} substasks`}</Text>
+        >{`${completedSubtasksLength} of ${subtasksLength} subtasks`}</Text>
       </S.Task>
     );
   });
 
   return (
     <S.Wrapper>
-      <S.Header>{`TODO (${data.length})`}</S.Header>
+      <S.Header>{`${name.toLocaleUpperCase()} (${tasks.length})`}</S.Header>
       <S.TaskList>{taskList}</S.TaskList>
     </S.Wrapper>
   );

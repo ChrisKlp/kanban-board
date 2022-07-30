@@ -77,7 +77,7 @@ export const ContentWrapper = styled.div<{ isSidebarOpen: boolean }>`
     }
 
     @media (${theme.media.lg}) {
-      padding-left: 3.2rem;
+      padding-left: ${isSidebarOpen ? 0 : '3.2rem'};
     }
   `};
 `;

@@ -62,7 +62,8 @@ const themeLight = {
     xl: 'min-width: 1440px',
   },
   shadow: {
-    primary: '0px 10px 20px rgba(54, 78, 126, 0.25)',
+    large: '0px 10px 20px rgba(54, 78, 126, 0.25)',
+    medium: '0px 4px 6px rgba(54, 78, 126, 0.1)',
   },
   transition: {
     default: '0.2s ease-in-out',

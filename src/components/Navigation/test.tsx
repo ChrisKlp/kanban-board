@@ -1,18 +1,13 @@
 import userEvent from '@testing-library/user-event';
 import { render } from 'utils/test-utils';
 import Navigation from '.';
-import navData from './mock';
 
 function renderNavigation() {
   const onButtonClick = jest.fn();
-  const onNavClick = jest.fn();
+  const onLinkClick = jest.fn();
 
   const utils = render(
-    <Navigation
-      data={navData}
-      onButtonClick={onButtonClick}
-      onNavClick={onNavClick}
-    />
+    <Navigation onButtonClick={onButtonClick} onLinkClick={onLinkClick} />
   );
 
   const wrapper = utils.getByTestId('navWrapper');
@@ -30,7 +25,7 @@ function renderNavigation() {
     button,
     sideBarButton,
     themeSwitch,
-    onNavClick,
+    onLinkClick,
     onButtonClick,
   };
 }
@@ -67,10 +62,10 @@ describe('<Navigation />', () => {
   });
 
   it('should call func on nav item press', () => {
-    const { navList, onNavClick } = renderNavigation();
+    const { navList, onLinkClick } = renderNavigation();
 
     userEvent.click(navList.lastElementChild!);
-    expect(onNavClick).toBeCalled();
-    expect(onNavClick).toBeCalledTimes(1);
+    expect(onLinkClick).toBeCalled();
+    expect(onLinkClick).toBeCalledTimes(1);
   });
 });

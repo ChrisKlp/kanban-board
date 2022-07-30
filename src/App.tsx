@@ -1,20 +1,22 @@
 import Board from 'components/Board';
 import Layout from 'components/Layout';
+import useBoardState from 'stores/boardState';
 import useThemeState from 'stores/themeState';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'styles/GlobalStyles';
 import themeLight, { themeDark } from 'styles/theme';
-import data from 'data.json';
 
 function App() {
   const isDarkTheme = useThemeState((s) => s.isDarkTheme);
+  const activeBoard = useBoardState((state) => state.activeBoard);
+  const boards = useBoardState((state) => state.boards);
+
+  const activeBoardData = boards.find((board) => board.id === activeBoard);
 
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyles />
-      <Layout>
-        <Board board={data.boards[0]} />
-      </Layout>
+      <Layout>{activeBoardData && <Board board={activeBoardData} />}</Layout>
     </ThemeProvider>
   );
 }

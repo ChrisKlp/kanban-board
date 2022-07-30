@@ -1,23 +1,25 @@
 import iconAddTaskMobile from 'assets/icon-add-task-mobile.svg';
 import iconChevronDown from 'assets/icon-chevron-down.svg';
 import iconChevronUp from 'assets/icon-chevron-up.svg';
-import logoLight from 'assets/logo-light.svg';
 import logoDark from 'assets/logo-dark.svg';
+import logoLight from 'assets/logo-light.svg';
 import logoMobile from 'assets/logo-mobile.svg';
+import ContextMenu from 'components/ContextMenu';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
-import navData from 'components/Navigation/mock';
+import useMediaQuery from 'hooks/useMediaQuery';
 import { useCallback, useEffect, useState } from 'react';
-import ContextMenu from 'components/ContextMenu';
+import useBoardState from 'stores/boardState';
 import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
-import useMediaQuery from 'hooks/useMediaQuery';
 import * as S from './style';
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
+  const boards = useBoardState((state) => state.boards);
+  const activeBoard = useBoardState((state) => state.activeBoard);
   const isTablet = useMediaQuery('(min-width: 768px)');
 
   const handleMenuOpen = useCallback(
@@ -25,7 +27,13 @@ function Navbar() {
     [isMenuOpen]
   );
 
-  const handleLogo = () => {
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const activeBoardTitle = boards.find(
+    (board) => board.id === activeBoard
+  )?.name;
+
+  const setLogo = () => {
     let logo = logoMobile;
     if (isTablet) logo = logoDark;
     if (isTablet && isDarkTheme) logo = logoLight;
@@ -41,17 +49,17 @@ function Navbar() {
     <>
       <S.Wrapper>
         <S.LogoWrapper isSidebarOpen={isSidebarOpen}>
-          <img src={handleLogo()} alt="Kanban logo" />
+          <img src={setLogo()} alt="Kanban logo" />
         </S.LogoWrapper>
         <S.ContentWrapper isSidebarOpen={isSidebarOpen}>
           <S.NavDropdown onClick={handleMenuOpen}>
-            <Heading>Platform Launch</Heading>
+            <Heading>{activeBoardTitle}</Heading>
             <img
               src={isMenuOpen ? iconChevronUp : iconChevronDown}
               alt="Board list dropdown icon"
             />
           </S.NavDropdown>
-          <Heading as="h2">Platform Launch</Heading>
+          <Heading as="h2">{activeBoardTitle}</Heading>
           <div>
             <S.NewTaskButton>
               <img src={iconAddTaskMobile} alt="Add task icon" />
@@ -64,12 +72,9 @@ function Navbar() {
       {isMenuOpen && (
         <>
           <S.NavigationMobileWrapper>
-            <Navigation
-              data={navData}
-              onNavClick={() => setIsMenuOpen(false)}
-            />
+            <Navigation onLinkClick={closeMenu} />
           </S.NavigationMobileWrapper>
-          <S.Overlay onClick={() => setIsMenuOpen(false)} />
+          <S.Overlay onClick={closeMenu} />
         </>
       )}
     </>

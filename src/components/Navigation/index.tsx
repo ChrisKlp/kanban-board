@@ -3,38 +3,30 @@ import iconDark from 'assets/icon-dark-theme.svg';
 import iconHideSidebar from 'assets/icon-hide-sidebar.svg';
 import iconLight from 'assets/icon-light-theme.svg';
 import Heading from 'components/Heading';
-import { ForwardedRef, forwardRef, useState } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 import { ReactSVG } from 'react-svg';
+import useBoardState from 'stores/boardState';
 import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
 import * as S from './style';
 
 type NavigationProps = {
-  data: {
-    id: number;
-    name: string;
-    active: boolean;
-  }[];
   className?: string;
-  onNavClick?: (id: number) => void;
+  onLinkClick?: () => void;
   onButtonClick?: () => void;
 };
 
 function Navigation(
-  { data, onNavClick, onButtonClick, className }: NavigationProps,
+  { onLinkClick, onButtonClick, className }: NavigationProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  const [navList, setNavList] = useState(data);
   const { isDarkTheme, toggleTheme } = useThemeState();
   const toggleSidebar = useSidebarState((state) => state.toggleSidebar);
+  const { activeBoard, boards, setActiveBoard } = useBoardState();
 
-  const handleNavClick = (id: number) => {
-    setNavList(
-      navList.map((item) =>
-        item.id === id ? { ...item, active: true } : { ...item, active: false }
-      )
-    );
-    if (onNavClick) onNavClick(id);
+  const handleNavClick = (id: string) => {
+    setActiveBoard(id);
+    if (onLinkClick) onLinkClick();
   };
 
   return (
@@ -44,12 +36,12 @@ function Navigation(
           as="h4"
           size="small"
           variant="secondary"
-        >{`ALL BOARDS (${data.length})`}</Heading>
+        >{`ALL BOARDS (${boards.length})`}</Heading>
         <S.NavList>
-          {navList.map(({ id, name, active }) => (
+          {boards.map(({ id, name }) => (
             <S.NavItem
               key={id}
-              active={active}
+              active={id === activeBoard}
               onClick={() => handleNavClick(id)}
             >
               <ReactSVG src={iconBoard} />

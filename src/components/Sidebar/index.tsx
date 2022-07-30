@@ -1,7 +1,6 @@
-import Navigation from 'components/Navigation';
-import data from 'components/Navigation/mock';
-import logoLight from 'assets/logo-light.svg';
 import logoDark from 'assets/logo-dark.svg';
+import logoLight from 'assets/logo-light.svg';
+import Navigation from 'components/Navigation';
 import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
 import * as S from './style';
@@ -18,7 +17,7 @@ function Sidebar() {
           alt="Kanban logo"
         />
       </S.LogoWrapper>
-      <Navigation data={data} />
+      <Navigation />
     </S.Wrapper>
   );
 }

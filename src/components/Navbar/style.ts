@@ -120,12 +120,13 @@ export const NavigationMobileWrapper = styled.nav`
   ${({ theme }) => css`
     position: absolute;
     margin-top: 1.6rem;
+    top: 6.4rem;
     left: 5.6rem;
     right: 5.6rem;
     min-width: 22rem;
     background-color: ${theme.colors.bg.primary};
     border-radius: 0.8rem;
-    box-shadow: ${theme.shadow.primary};
+    box-shadow: ${theme.shadow.large};
     animation: ${fadeIn} ${theme.transition.default};
     z-index: 1;
 

@@ -6,6 +6,9 @@ export const Wrapper = styled.div`
 `;
 export const Content = styled.div<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
     @media (${theme.media.md}) {
       margin-left: ${isOpen ? '26rem' : 0};
     }
@@ -39,6 +42,7 @@ export const SidebarToggle = styled.button`
 `;
 
 export const MainWrapper = styled.main`
-  padding-left: 1.6rem;
-  padding-top: 2.4rem;
+  overflow: auto;
+  /* padding-left: 1.6rem; */
+  /* padding-top: 2.4rem; */
 `;

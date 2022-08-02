@@ -4,10 +4,11 @@ import * as S from './style';
 export type SubtaskProps = {
   children: React.ReactNode;
   onChecked?: (checked: boolean) => void;
+  isChecked?: boolean;
 };
 
-function Subtask({ children, onChecked }: SubtaskProps) {
-  const [checked, setChecked] = useState(false);
+function Subtask({ children, isChecked, onChecked }: SubtaskProps) {
+  const [checked, setChecked] = useState(isChecked || false);
 
   const handleClick = () => {
     setChecked(!checked);

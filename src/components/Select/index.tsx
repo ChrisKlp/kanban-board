@@ -8,9 +8,10 @@ type SelectProps = {
   title: string;
   options: string[];
   onSelect?: (option: string) => void;
+  className?: string;
 };
 
-function Select({ title, options, onSelect }: SelectProps) {
+function Select({ className, title, options, onSelect }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(title);
   const ref = useRef(null);
@@ -26,7 +27,7 @@ function Select({ title, options, onSelect }: SelectProps) {
   useOnClickOutside(ref, onClose);
 
   return (
-    <S.Wrapper ref={ref}>
+    <S.Wrapper ref={ref} className={className}>
       <S.Title onClick={onToggle} isOpen={isOpen}>
         <Text as="span" size="large">
           {selectedOption}

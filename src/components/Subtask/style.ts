@@ -4,6 +4,7 @@ import Text from 'components/Text';
 
 export const Checkbox = styled.span`
   ${({ theme }) => css`
+    flex-shrink: 0;
     position: relative;
     width: 1.6rem;
     height: 1.6rem;

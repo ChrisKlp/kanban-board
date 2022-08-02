@@ -18,8 +18,9 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
-  const boards = useBoardState((state) => state.boards);
-  const activeBoard = useBoardState((state) => state.activeBoard);
+  const activeBoard = useBoardState((state) =>
+    state.boards.find((board) => board.id === state.activeBoard)
+  );
   const isTablet = useMediaQuery('(min-width: 768px)');
 
   const handleMenuOpen = useCallback(
@@ -29,9 +30,7 @@ function Navbar() {
 
   const closeMenu = () => setIsMenuOpen(false);
 
-  const activeBoardTitle = boards.find(
-    (board) => board.id === activeBoard
-  )?.name;
+  const activeBoardTitle = activeBoard?.name;
 
   const setLogo = () => {
     let logo = logoMobile;

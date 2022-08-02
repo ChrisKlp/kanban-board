@@ -1,12 +1,10 @@
 import Board from 'components/Board';
 import Layout from 'components/Layout';
-import TaskView from 'components/TaskView';
 import useBoardState from 'stores/boardState';
 import useThemeState from 'stores/themeState';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from 'styles/GlobalStyles';
 import themeLight, { themeDark } from 'styles/theme';
-import taskData from 'components/TaskView/mock';
 
 function App() {
   const isDarkTheme = useThemeState((s) => s.isDarkTheme);

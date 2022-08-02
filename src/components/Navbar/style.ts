@@ -96,11 +96,13 @@ export const NewTaskButton = styled(Button).attrs({
   size: 'icon',
 })`
   ${({ theme }) => css`
+    margin-right: 0.6rem;
     & span {
       display: none;
     }
 
     @media (${theme.media.md}) {
+      margin-right: 1.4rem;
       & span {
         display: block;
       }

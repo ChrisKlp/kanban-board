@@ -23,7 +23,7 @@ function TaskView({
     <Modal closeModal={closeModal}>
       <S.HeaderWrapper>
         <Heading as="h2">{task.title}</Heading>
-        <ContextMenu />
+        <ContextMenu variant="task" />
       </S.HeaderWrapper>
       {!!task.description && <S.Description>{task.description}</S.Description>}
       <S.Label>{subtasksStatus}</S.Label>
@@ -35,7 +35,10 @@ function TaskView({
         ))}
       </S.SubtasksWrapper>
       <S.Label>Current Status</S.Label>
-      <S.StatusSelect title={task.status} options={statusOptions} />
+      <S.StatusSelect
+        title={task.status || 'Select status'}
+        options={statusOptions}
+      />
     </Modal>
   );
 }

@@ -1,17 +1,16 @@
 import Select from 'components/Select';
 import Text from 'components/Text';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    margin-bottom: 2.4rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.4rem;
 
-    & > h2 {
-      flex: 1;
-    }
-  `};
+  & > h2 {
+    flex: 1 0 0%;
+    padding-right: 5%;
+  }
 `;
 
 export const Label = styled(Text).attrs({
@@ -26,11 +25,9 @@ export const Description = styled(Text).attrs({
 `;
 
 export const SubtasksWrapper = styled.div`
-  ${({ theme }) => css`
-    margin: 1.6rem 0 2.4rem;
-    display: grid;
-    gap: 0.8rem;
-  `};
+  margin: 1.6rem 0 2.4rem;
+  display: grid;
+  gap: 0.8rem;
 `;
 
 export const StatusSelect = styled(Select)`

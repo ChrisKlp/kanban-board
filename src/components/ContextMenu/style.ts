@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme, keyframes } from 'styled-components';
+import { ContextMenuProps } from '.';
 
 const fadeIn = keyframes`
   from {
@@ -19,28 +20,39 @@ export const Wrapper = styled.div`
 export const Button = styled.button`
   ${({ theme }) => css`
     position: relative;
-    margin-left: 0.6rem;
     margin-right: -1rem;
     padding: 0 1rem;
     cursor: pointer;
 
     @media (${theme.media.md}) {
-      margin-left: 1.4rem;
-    }
-
-    @media (${theme.media.lg}) {
-      margin-left: 1.4rem;
-      margin-right: -0.2rem;
     }
   `};
 `;
 
-export const Content = styled.ul`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 100%;
+const contentVariants = {
+  board: (theme: DefaultTheme) => css`
     right: 0;
     margin-top: 1.6rem;
+
+    @media (${theme.media.md}) {
+      margin-top: 2.6rem;
+    }
+
+    @media (${theme.media.lg}) {
+      margin-top: 3.6rem;
+    }
+  `,
+  task: () => css`
+    transform: translateX(-50%);
+    left: 1rem;
+    margin-top: 1.6rem;
+  `,
+};
+
+export const Content = styled.ul<Pick<ContextMenuProps, 'variant'>>`
+  ${({ theme, variant }) => css`
+    position: absolute;
+    top: 100%;
     padding: 1.6rem;
     min-width: 19.2rem;
     display: grid;
@@ -50,13 +62,7 @@ export const Content = styled.ul`
     animation: ${fadeIn} ${theme.transition.fast};
     z-index: 10;
 
-    @media (${theme.media.md}) {
-      margin-top: 2.6rem;
-    }
-
-    @media (${theme.media.lg}) {
-      margin-top: 3.6rem;
-    }
+    ${!!variant && contentVariants[variant](theme)}
   `};
 `;
 

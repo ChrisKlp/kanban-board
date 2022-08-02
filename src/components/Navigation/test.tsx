@@ -2,6 +2,8 @@ import userEvent from '@testing-library/user-event';
 import { render } from 'utils/test-utils';
 import Navigation from '.';
 
+jest.mock('uuid', () => ({ v4: () => 'hjhj87878' }));
+
 function renderNavigation() {
   const onButtonClick = jest.fn();
   const onLinkClick = jest.fn();

@@ -8,6 +8,7 @@ import { ReactSVG } from 'react-svg';
 import useBoardState from 'stores/boardState';
 import useSidebarState from 'stores/sidebarState';
 import useThemeState from 'stores/themeState';
+import shallow from 'zustand/shallow';
 import * as S from './style';
 
 type NavigationProps = {
@@ -22,7 +23,14 @@ function Navigation(
 ) {
   const { isDarkTheme, toggleTheme } = useThemeState();
   const toggleSidebar = useSidebarState((state) => state.toggleSidebar);
-  const { activeBoard, boards, setActiveBoard } = useBoardState();
+  const { activeBoard, boards, setActiveBoard } = useBoardState(
+    (state) => ({
+      boards: state.boards,
+      activeBoard: state.activeBoard,
+      setActiveBoard: state.setActiveBoard,
+    }),
+    shallow
+  );
 
   const handleNavClick = (id: string) => {
     setActiveBoard(id);

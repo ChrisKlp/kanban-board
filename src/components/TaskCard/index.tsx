@@ -30,9 +30,14 @@ function TaskCard({ task }: TaskCardProps) {
   ).length;
   const subtasksStatus = `Subtasks (${completedSubtasksLength} of ${subtasksLength})`;
 
-  const onEditClick = () => {
+  const open2ndModal = () => {
     closeModal();
     openFormModal();
+  };
+
+  const close2ndModal = () => {
+    closeFormModal();
+    openModal();
   };
 
   return (
@@ -47,7 +52,7 @@ function TaskCard({ task }: TaskCardProps) {
         <TaskView
           task={task}
           closeModal={closeModal}
-          onEditClick={onEditClick}
+          onEditClick={open2ndModal}
           subtasksStatus={subtasksStatus}
           statusOptions={statusOptions}
         />
@@ -57,6 +62,7 @@ function TaskCard({ task }: TaskCardProps) {
           task={task}
           title="Edit Task"
           closeModal={closeFormModal}
+          close2ndModal={close2ndModal}
           statusOptions={statusOptions}
         />
       )}

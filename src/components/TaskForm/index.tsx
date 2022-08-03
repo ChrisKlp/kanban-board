@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as S from './style';
 
-const initialValues = {
+const initialValues: TTask = {
+  id: uuidv4(),
   title: '',
   description: '',
   status: '',
@@ -27,10 +28,17 @@ type TaskFormProps = {
   task?: TTask;
   title: string;
   statusOptions?: string[];
-  closeModal?: () => void;
+  closeModal: () => void;
+  close2ndModal: () => void;
 };
 
-function TaskForm({ title, task, statusOptions, closeModal }: TaskFormProps) {
+function TaskForm({
+  title,
+  task,
+  statusOptions,
+  closeModal,
+  close2ndModal,
+}: TaskFormProps) {
   const [values, setValues] = useState(task || initialValues);
 
   const handleChange = (field: string, value: string) => {
@@ -70,6 +78,7 @@ function TaskForm({ title, task, statusOptions, closeModal }: TaskFormProps) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(values);
+    close2ndModal();
   };
 
   return (

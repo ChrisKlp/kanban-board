@@ -5,7 +5,7 @@ const modalRoot = document.body as HTMLElement;
 
 type ModalProps = {
   children: React.ReactNode;
-  closeModal?: () => void;
+  closeModal: () => void;
 };
 
 function Modal({ children, closeModal }: ModalProps) {

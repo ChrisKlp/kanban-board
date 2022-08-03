@@ -7,11 +7,11 @@ import * as S from './style';
 type SelectProps = {
   title: string;
   options: string[];
-  onSelect?: (option: string) => void;
+  onOptionSelect?: (option: string) => void;
   className?: string;
 };
 
-function Select({ className, title, options, onSelect }: SelectProps) {
+function Select({ className, title, options, onOptionSelect }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(title);
   const ref = useRef(null);
@@ -21,7 +21,7 @@ function Select({ className, title, options, onSelect }: SelectProps) {
   const handleSelect = (option: string) => {
     setSelectedOption(option);
     onClose();
-    if (onSelect) onSelect(option);
+    if (onOptionSelect) onOptionSelect(option);
   };
 
   useOnClickOutside(ref, onClose);

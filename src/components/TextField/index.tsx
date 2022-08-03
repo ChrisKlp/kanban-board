@@ -1,24 +1,36 @@
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import * as S from './style';
 
 export type TextFieldProps = {
-  onChange?: (value: string) => void;
   error?: string;
   placeholder?: string;
-};
+  onInputChange?: (value: string) => void;
+  textarea?: boolean;
+  initialValue?: string;
+} & InputHTMLAttributes<HTMLInputElement>;
 
-function TextField({ error, placeholder, onChange }: TextFieldProps) {
-  const [value, setValue] = useState('');
+function TextField({
+  textarea,
+  type,
+  name,
+  error,
+  placeholder,
+  initialValue = '',
+  onInputChange,
+}: TextFieldProps) {
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.value;
     setValue(newValue);
-    if (onChange) onChange(newValue);
+    if (onInputChange) onInputChange(newValue);
   };
   return (
-    <S.Wrapper error={error}>
+    <S.Wrapper error={error} textarea={textarea}>
       <S.Input
-        type="text"
+        as={textarea ? 'textarea' : 'input'}
+        type={type || 'text'}
+        name={name}
         placeholder={placeholder}
         onChange={handleChange}
         value={value}

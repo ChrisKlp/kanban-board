@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ButtonHTMLAttributes } from 'react';
 import Wrapper from './style';
 
@@ -13,6 +14,7 @@ function Button({
   variant = 'primary',
   className,
   disabled,
+  ...props
 }: ButtonProps) {
   return (
     <Wrapper
@@ -20,6 +22,7 @@ function Button({
       size={size}
       variant={variant}
       disabled={disabled}
+      {...props}
     >
       {children}
     </Wrapper>

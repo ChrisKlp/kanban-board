@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { TextFieldProps } from '.';
 
-export const Wrapper = styled.div<Pick<TextFieldProps, 'error'>>`
-  ${({ theme, error }) => css`
+export const Wrapper = styled.div<Pick<TextFieldProps, 'error' | 'textarea'>>`
+  ${({ theme, error, textarea }) => css`
     padding: 0 1.6rem;
     display: flex;
     align-items: center;
@@ -23,6 +23,12 @@ export const Wrapper = styled.div<Pick<TextFieldProps, 'error'>>`
       flex: 1;
     }
 
+    ${textarea &&
+    css`
+      padding: 0.8rem 1.6rem;
+      height: 11.2rem;
+    `}
+
     ${error &&
     css`
       border: 1px solid ${theme.colors.red500};
@@ -40,8 +46,8 @@ const text = css`
   line-height: 2.3rem;
 `;
 
-export const Input = styled.input`
-  ${({ theme }) => css`
+export const Input = styled.input<{ as?: React.ElementType }>`
+  ${({ theme, as }) => css`
     ${text}
     font-family: inherit;
     color: ${theme.colors.text.primary};
@@ -53,6 +59,12 @@ export const Input = styled.input`
       color: ${theme.colors.text.primary};
       opacity: 0.25;
     }
+
+    ${as === 'textarea' &&
+    css`
+      resize: none;
+      height: 100%;
+    `}
   `};
 `;
 

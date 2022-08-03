@@ -12,7 +12,11 @@ describe('<Dropdown>', () => {
   beforeEach(() => {
     onSelect = jest.fn();
     const utils = render(
-      <Select title={mock.title} options={mock.options} onSelect={onSelect} />
+      <Select
+        title={mock.title}
+        options={mock.options}
+        onOptionSelect={onSelect}
+      />
     );
     titleText = utils.getByText(/select status/i);
     title = titleText.parentElement!;

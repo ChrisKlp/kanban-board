@@ -1,4 +1,5 @@
 import Heading from 'components/Heading';
+import TaskForm from 'components/TaskForm';
 import TaskView from 'components/TaskView';
 import Text from 'components/Text';
 import useModal from 'hooks/useModal';
@@ -12,31 +13,50 @@ type TaskCardProps = {
 
 function TaskCard({ task }: TaskCardProps) {
   const { isModalOpen, openModal, closeModal } = useModal();
+  const {
+    isModalOpen: isFormModalOpen,
+    closeModal: closeFormModal,
+    openModal: openFormModal,
+  } = useModal();
+
   const activeBoard = useBoardState((state) =>
     state.boards.find((board) => board.id === state.activeBoard)
   );
   const statusOptions = activeBoard?.columns.map((column) => column.name);
 
-  const { title, subtasks } = task;
-  const subtasksLength = subtasks.length;
-  const completedSubtasksLength = subtasks.filter(
+  const subtasksLength = task.subtasks.length;
+  const completedSubtasksLength = task.subtasks.filter(
     (subtask) => subtask.isCompleted
   ).length;
   const subtasksStatus = `Subtasks (${completedSubtasksLength} of ${subtasksLength})`;
 
+  const onEditClick = () => {
+    closeModal();
+    openFormModal();
+  };
+
   return (
     <>
       <Wrapper onClick={openModal}>
-        <Heading size="medium">{title}</Heading>
+        <Heading size="medium">{task.title}</Heading>
         <Text variant="secondary" as="span">
           {`${completedSubtasksLength} of ${subtasksLength} subtasks`}
         </Text>
       </Wrapper>
-      {isModalOpen && statusOptions && (
+      {isModalOpen && (
         <TaskView
           task={task}
           closeModal={closeModal}
+          onEditClick={onEditClick}
           subtasksStatus={subtasksStatus}
+          statusOptions={statusOptions}
+        />
+      )}
+      {isFormModalOpen && (
+        <TaskForm
+          task={task}
+          title="Edit Task"
+          closeModal={closeFormModal}
           statusOptions={statusOptions}
         />
       )}

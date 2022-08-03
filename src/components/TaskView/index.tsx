@@ -10,8 +10,9 @@ import * as S from './style';
 
 type TaskViewProps = {
   task: TTask;
-  statusOptions: string[];
+  statusOptions?: string[];
   subtasksStatus: string;
+  onEditClick: () => void;
   closeModal: () => void;
 };
 
@@ -19,13 +20,14 @@ export default function TaskView({
   task,
   statusOptions,
   subtasksStatus,
+  onEditClick,
   closeModal,
 }: TaskViewProps) {
   return (
     <Modal closeModal={closeModal}>
       <S.HeaderWrapper>
         <Heading as="h2">{task.title}</Heading>
-        <ContextMenu variant="task" />
+        <ContextMenu variant="task" onEditClick={onEditClick} />
       </S.HeaderWrapper>
       {!!task.description && (
         <Text variant="secondary" size="large">
@@ -40,13 +42,15 @@ export default function TaskView({
           </Subtask>
         ))}
       </S.SubtasksWrapper>
-      <S.StatusWrapper>
-        <Text variant="secondary">Current Status</Text>
-        <Select
-          title={task.status || 'Select status'}
-          options={statusOptions}
-        />
-      </S.StatusWrapper>
+      {statusOptions && (
+        <S.StatusWrapper>
+          <Text variant="secondary">Current Status</Text>
+          <Select
+            title={task.status || 'Select status'}
+            options={statusOptions}
+          />
+        </S.StatusWrapper>
+      )}
     </Modal>
   );
 }

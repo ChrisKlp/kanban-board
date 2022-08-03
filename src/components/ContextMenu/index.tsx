@@ -5,14 +5,14 @@ import capitalizeFirstLetter from 'utils/stringUtils';
 import * as S from './style';
 
 export type ContextMenuProps = {
-  handleEditBoard?: () => void;
-  handleDeleteBoard?: () => void;
+  onEditClick?: () => void;
+  onDeleteClick?: () => void;
   variant?: 'board' | 'task';
 };
 
 function ContextMenu({
-  handleEditBoard,
-  handleDeleteBoard,
+  onEditClick,
+  onDeleteClick,
   variant = 'board',
 }: ContextMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,12 +22,12 @@ function ContextMenu({
 
   const handleEdit = () => {
     onClose();
-    if (handleEditBoard) handleEditBoard();
+    if (onEditClick) onEditClick();
   };
 
   const handleDelete = () => {
     onClose();
-    if (handleDeleteBoard) handleDeleteBoard();
+    if (onDeleteClick) onDeleteClick();
   };
 
   useOnClickOutside(ref, onClose);

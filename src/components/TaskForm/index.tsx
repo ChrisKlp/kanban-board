@@ -1,14 +1,13 @@
+import iconCross from 'assets/icon-cross.svg';
 import Button from 'components/Button';
 import Heading from 'components/Heading';
 import Modal from 'components/Modal';
 import Select from 'components/Select';
 import Text from 'components/Text';
 import TextField from 'components/TextField';
-import iconCross from 'assets/icon-cross.svg';
+import { TTask } from 'models';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import useBoardState from 'stores/boardState';
-import { TTask } from 'models';
 import * as S from './style';
 
 const initialValues = {
@@ -27,15 +26,12 @@ const initialValues = {
 type TaskFormProps = {
   task?: TTask;
   title: string;
+  statusOptions?: string[];
   closeModal?: () => void;
 };
 
-function TaskForm({ title, task, closeModal }: TaskFormProps) {
+function TaskForm({ title, task, statusOptions, closeModal }: TaskFormProps) {
   const [values, setValues] = useState(task || initialValues);
-  const activeBoard = useBoardState((state) =>
-    state.boards.find((board) => board.id === state.activeBoard)
-  );
-  const statusOptions = activeBoard?.columns.map((column) => column.name);
 
   const handleChange = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }));
@@ -86,6 +82,7 @@ function TaskForm({ title, task, closeModal }: TaskFormProps) {
           </Text>
           <TextField
             name="title"
+            initialValue={values.title}
             onInputChange={(v) => handleChange('title', v)}
             placeholder="e.g. Take coffee break"
           />
@@ -95,9 +92,10 @@ function TaskForm({ title, task, closeModal }: TaskFormProps) {
             Description
           </Text>
           <TextField
-            name="description"
-            onInputChange={(v) => handleChange('description', v)}
             textarea
+            name="description"
+            initialValue={values.description}
+            onInputChange={(v) => handleChange('description', v)}
             placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
           />
         </S.Group>
@@ -106,10 +104,11 @@ function TaskForm({ title, task, closeModal }: TaskFormProps) {
             Subtasks
           </Text>
           <S.SubtasksGroup>
-            {values.subtasks.map(({ id }) => (
+            {values.subtasks.map(({ id, title: subtaskTitle }) => (
               <S.SubtaskFieldGroup key={id}>
                 <TextField
                   name={id}
+                  initialValue={subtaskTitle}
                   onInputChange={(v) => handleSubtaskChange(id, v)}
                   placeholder="e.g. Make coffee"
                 />
@@ -136,7 +135,7 @@ function TaskForm({ title, task, closeModal }: TaskFormProps) {
               Status
             </Text>
             <Select
-              title={task?.status || 'Select status'}
+              title={values.status || 'Select status'}
               options={statusOptions}
               onOptionSelect={(v) => handleChange('status', v)}
             />

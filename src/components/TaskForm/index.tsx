@@ -7,6 +7,7 @@ import Text from 'components/Text';
 import TextField from 'components/TextField';
 import { TTask } from 'models';
 import { useState } from 'react';
+import useBoardState from 'stores/boardState';
 import { v4 as uuidv4 } from 'uuid';
 import * as S from './style';
 
@@ -40,6 +41,7 @@ function TaskForm({
   close2ndModal,
 }: TaskFormProps) {
   const [values, setValues] = useState(task || initialValues);
+  const editTask = useBoardState((s) => s.editTask);
 
   const handleChange = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }));
@@ -77,7 +79,7 @@ function TaskForm({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(values);
+    if (task) editTask(values);
     close2ndModal();
   };
 

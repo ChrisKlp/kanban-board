@@ -2,7 +2,7 @@ import { InputHTMLAttributes, useState } from 'react';
 import * as S from './style';
 
 export type TextFieldProps = {
-  error?: string;
+  error?: boolean;
   placeholder?: string;
   onInputChange?: (value: string) => void;
   textarea?: boolean;
@@ -35,7 +35,7 @@ function TextField({
         onChange={handleChange}
         value={value}
       />
-      {!!error && <S.ErrorText>{error}</S.ErrorText>}
+      {!!error && <S.ErrorText>Can’t be empty</S.ErrorText>}
     </S.Wrapper>
   );
 }

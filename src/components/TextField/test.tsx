@@ -3,11 +3,11 @@ import { render } from 'utils/test-utils';
 import TextField, { TextFieldProps } from '.';
 
 function renderTextField(props?: TextFieldProps) {
-  const onChange = jest.fn();
+  const onInputChange = jest.fn();
   const utils = render(
     <TextField
       placeholder="Enter task name"
-      onChange={onChange}
+      onInputChange={onInputChange}
       error={props?.error}
     />
   );
@@ -15,10 +15,10 @@ function renderTextField(props?: TextFieldProps) {
   const wrapper = input.parentElement!;
   let error = '' as any;
   if (props?.error) {
-    error = utils.getByText(props.error);
+    error = utils.getByText('Can’t be empty');
   }
 
-  return { ...utils, input, wrapper, error, onChange };
+  return { ...utils, input, wrapper, error, onInputChange };
 }
 
 describe('<TextField/>', () => {
@@ -36,16 +36,16 @@ describe('<TextField/>', () => {
   });
 
   it('should change its value when typing', () => {
-    const { input, onChange } = renderTextField();
+    const { input, onInputChange } = renderTextField();
     const text = 'Building a slideshow';
     userEvent.type(input, text);
 
-    expect(onChange).toBeCalledTimes(text.length);
-    expect(onChange).toBeCalledWith(text);
+    expect(onInputChange).toBeCalledTimes(text.length);
+    expect(onInputChange).toBeCalledWith(text);
   });
 
   it('should render an error', () => {
-    const { wrapper, error } = renderTextField({ error: 'Can’t be empty' });
+    const { wrapper, error } = renderTextField({ error: true });
 
     expect(error).toBeInTheDocument();
     expect(wrapper).toHaveStyle({

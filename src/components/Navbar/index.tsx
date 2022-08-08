@@ -7,7 +7,9 @@ import logoMobile from 'assets/logo-mobile.svg';
 import ContextMenu from 'components/ContextMenu';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
+import TaskForm from 'components/TaskForm';
 import useMediaQuery from 'hooks/useMediaQuery';
+import useModal from 'hooks/useModal';
 import { useCallback, useEffect, useState } from 'react';
 import useBoardState from 'stores/boardState';
 import useSidebarState from 'stores/sidebarState';
@@ -17,10 +19,12 @@ import * as S from './style';
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
+  const { isModalOpen, closeModal, openModal } = useModal();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
   const activeBoard = useBoardState((state) =>
     state.boards.find((board) => board.id === state.activeBoard)
   );
+  const statusOptions = activeBoard?.columns.map((column) => column.name);
   const isTablet = useMediaQuery('(min-width: 768px)');
 
   const handleMenuOpen = useCallback(
@@ -60,7 +64,7 @@ function Navbar() {
           </S.NavDropdown>
           <Heading as="h2">{activeBoardTitle}</Heading>
           <div>
-            <S.NewTaskButton>
+            <S.NewTaskButton onClick={openModal}>
               <img src={iconAddTaskMobile} alt="Add task icon" />
               <span>+ Add New Task</span>
             </S.NewTaskButton>
@@ -75,6 +79,13 @@ function Navbar() {
           </S.NavigationMobileWrapper>
           <S.Overlay onClick={closeMenu} />
         </>
+      )}
+      {isModalOpen && (
+        <TaskForm
+          title="Add New Task"
+          closeModal={closeModal}
+          statusOptions={statusOptions}
+        />
       )}
     </>
   );

@@ -45,9 +45,9 @@ const useBoardState = create<TBoardState>()(
         const columnIndex = get().boards[boardIndex].columns.findIndex(
           (column) => column.name === task.status
         );
-        return set((state) =>
-          state.boards[boardIndex].columns[columnIndex].tasks.unshift(task)
-        );
+        return set((state) => {
+          state.boards[boardIndex].columns[columnIndex].tasks.unshift(task);
+        });
       },
 
       editTask: (newTask: TTask) => {

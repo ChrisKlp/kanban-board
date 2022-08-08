@@ -12,26 +12,12 @@ import { FieldErrors, validateForm } from 'utils/validation';
 import { v4 as uuidv4 } from 'uuid';
 import * as S from './style';
 
-const initialValues: TTask = {
-  id: uuidv4(),
-  title: '',
-  description: '',
-  status: '',
-  subtasks: [
-    {
-      id: uuidv4(),
-      title: '',
-      isCompleted: false,
-    },
-  ],
-};
-
 type TaskFormProps = {
   task?: TTask;
   title: string;
   statusOptions?: string[];
   closeModal: () => void;
-  close2ndModal: () => void;
+  close2ndModal?: () => void;
 };
 
 function TaskForm({
@@ -41,9 +27,24 @@ function TaskForm({
   closeModal,
   close2ndModal,
 }: TaskFormProps) {
-  const [values, setValues] = useState(task || initialValues);
+  const [values, setValues] = useState(
+    task || {
+      id: uuidv4(),
+      title: '',
+      description: '',
+      status: statusOptions ? statusOptions[0] : '',
+      subtasks: [
+        {
+          id: uuidv4(),
+          title: '',
+          isCompleted: false,
+        },
+      ],
+    }
+  );
   const [errors, setErrors] = useState<FieldErrors>({});
   const editTask = useBoardState((s) => s.editTask);
+  const createTask = useBoardState((s) => s.createTask);
 
   const handleChange = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }));
@@ -89,8 +90,17 @@ function TaskForm({
       return;
     }
 
-    if (task) editTask(values);
-    close2ndModal();
+    if (task) {
+      editTask(values);
+    } else {
+      createTask(values);
+    }
+
+    if (close2ndModal) {
+      close2ndModal();
+    } else {
+      closeModal();
+    }
   };
 
   return (

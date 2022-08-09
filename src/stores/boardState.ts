@@ -12,7 +12,7 @@ type TBoardState = {
   setActiveBoard: (id: string) => void;
   createBoard: (board: TBoard) => void;
   editBoard: (board: TBoard) => void;
-  deleteBoard: (id: string) => void;
+  deleteBoard: () => void;
   createTask: (task: TTask) => void;
   editTask: (newTask: TTask) => void;
   deleteTask: (id: string) => void;
@@ -30,15 +30,26 @@ const useBoardState = create<TBoardState>()(
       getActiveBoard: () =>
         get().boards.find((board) => board.id === get().activeBoard),
 
-      createBoard: (board: TBoard) =>
+      createBoard: (board: TBoard) => {
         set((state) => {
           state.boards.push(board);
-        }),
+        });
 
-      deleteBoard: (id: string) =>
+        return get().setActiveBoard(board.id);
+      },
+
+      deleteBoard: () => {
         set((state) => ({
-          boards: state.boards.filter((board) => board.id !== id),
-        })),
+          boards: state.boards.filter(
+            (board) => board.id !== state.activeBoard
+          ),
+        }));
+
+        const isEmptyBoards = get().boards.length === 0;
+        const activeBoard = !isEmptyBoards ? get().boards[0].id : '';
+
+        return get().setActiveBoard(activeBoard);
+      },
 
       editBoard: (board: TBoard) => {},
 

@@ -17,7 +17,7 @@ import useThemeState from 'stores/themeState';
 import * as S from './style';
 
 function Navbar() {
-  const { getActiveBoard } = useBoardState();
+  const { getActiveBoard, deleteBoard } = useBoardState();
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const { isModalOpen, closeModal, openModal } = useModal();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
@@ -66,7 +66,7 @@ function Navbar() {
               <img src={iconAddTaskMobile} alt="Add task icon" />
               <span>+ Add New Task</span>
             </S.NewTaskButton>
-            <ContextMenu />
+            <ContextMenu variant="board" onDeleteClick={deleteBoard} />
           </div>
         </S.ContentWrapper>
       </S.Wrapper>

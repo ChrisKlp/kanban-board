@@ -8,15 +8,13 @@ import themeLight, { themeDark } from 'styles/theme';
 
 function App() {
   const isDarkTheme = useThemeState((s) => s.isDarkTheme);
-  const activeBoard = useBoardState((state) => state.activeBoard);
-  const boards = useBoardState((state) => state.boards);
-
-  const activeBoardData = boards.find((board) => board.id === activeBoard);
+  const { getActiveBoard } = useBoardState();
+  const board = getActiveBoard();
 
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyles />
-      <Layout>{activeBoardData && <Board board={activeBoardData} />}</Layout>
+      <Layout>{board && <Board board={board} />}</Layout>
     </ThemeProvider>
   );
 }

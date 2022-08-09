@@ -6,6 +6,16 @@ import { immer } from 'zustand/middleware/immer';
 import { TBoard, TTask } from 'models';
 import { v4 as uuidv4 } from 'uuid';
 
+function getActiveBoardIndex(boards: TBoard[], activeBoardId: string) {
+  return boards.findIndex((board) => board.id === activeBoardId);
+}
+
+function getActiveColumnIndex(board: TBoard, taskId: string) {
+  return board.columns.findIndex((column) =>
+    column.tasks.find((task) => task.id === taskId)
+  );
+}
+
 type TBoardState = {
   activeBoard: string;
   boards: TBoard[];
@@ -14,6 +24,7 @@ type TBoardState = {
   deleteBoard: (id: string) => void;
   createTask: (task: TTask) => void;
   editTask: (newTask: TTask) => void;
+  getActiveBoard: () => TBoard | undefined;
 };
 
 const useBoardState = create<TBoardState>()(
@@ -23,6 +34,9 @@ const useBoardState = create<TBoardState>()(
       boards: data.boards,
 
       setActiveBoard: (id: string) => set({ activeBoard: id }),
+
+      getActiveBoard: () =>
+        get().boards.find((board) => board.id === get().activeBoard),
 
       createBoard: (name: string) =>
         set((state) => {
@@ -39,9 +53,9 @@ const useBoardState = create<TBoardState>()(
         })),
 
       createTask: (task: TTask) => {
-        const boardIndex = get().boards.findIndex(
-          (board) => board.id === get().activeBoard
-        );
+        const { boards, activeBoard } = get();
+        const boardIndex = getActiveBoardIndex(boards, activeBoard);
+
         const columnIndex = get().boards[boardIndex].columns.findIndex(
           (column) => column.name === task.status
         );
@@ -50,10 +64,12 @@ const useBoardState = create<TBoardState>()(
         });
       },
 
+      changeTaskStatus: (status: Pick<TTask, 'status'>) => {},
+
       editTask: (newTask: TTask) => {
-        const boardIndex = get().boards.findIndex(
-          (board) => board.id === get().activeBoard
-        );
+        const { boards, activeBoard } = get();
+        const boardIndex = getActiveBoardIndex(boards, activeBoard);
+
         const columnIndex = get().boards[boardIndex].columns.findIndex(
           (column) => column.tasks.find((task) => task.id === newTask.id)
         );

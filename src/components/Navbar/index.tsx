@@ -17,15 +17,15 @@ import useThemeState from 'stores/themeState';
 import * as S from './style';
 
 function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getActiveBoard } = useBoardState();
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const { isModalOpen, closeModal, openModal } = useModal();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
-  const activeBoard = useBoardState((state) =>
-    state.boards.find((board) => board.id === state.activeBoard)
-  );
-  const statusOptions = activeBoard?.columns.map((column) => column.name);
   const isTablet = useMediaQuery('(min-width: 768px)');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const statusOptions = getActiveBoard()?.columns.map((column) => column.name);
+  const activeBoardTitle = getActiveBoard()?.name;
 
   const handleMenuOpen = useCallback(
     () => setIsMenuOpen(!isMenuOpen),
@@ -33,8 +33,6 @@ function Navbar() {
   );
 
   const closeMenu = () => setIsMenuOpen(false);
-
-  const activeBoardTitle = activeBoard?.name;
 
   const setLogo = () => {
     let logo = logoMobile;

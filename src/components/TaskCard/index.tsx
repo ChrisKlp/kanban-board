@@ -12,6 +12,7 @@ type TaskCardProps = {
 };
 
 function TaskCard({ task }: TaskCardProps) {
+  const { getActiveBoard } = useBoardState();
   const { isModalOpen, openModal, closeModal } = useModal();
   const {
     isModalOpen: isFormModalOpen,
@@ -19,10 +20,7 @@ function TaskCard({ task }: TaskCardProps) {
     openModal: openFormModal,
   } = useModal();
 
-  const activeBoard = useBoardState((state) =>
-    state.boards.find((board) => board.id === state.activeBoard)
-  );
-  const statusOptions = activeBoard?.columns.map((column) => column.name);
+  const statusOptions = getActiveBoard()?.columns.map((column) => column.name);
 
   const subtasksLength = task.subtasks.length;
   const completedSubtasksLength = task.subtasks.filter(

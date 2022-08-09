@@ -14,6 +14,7 @@ type TaskViewProps = {
   statusOptions?: string[];
   subtasksStatus: string;
   onEditClick: () => void;
+  onDeleteClick: () => void;
   closeModal: () => void;
 };
 
@@ -22,10 +23,10 @@ export default function TaskView({
   statusOptions,
   subtasksStatus,
   onEditClick,
+  onDeleteClick,
   closeModal,
 }: TaskViewProps) {
   const editTask = useBoardState((s) => s.editTask);
-  const deleteTask = useBoardState((s) => s.deleteTask);
 
   const handleStatusChange = (value: string) => {
     const newTask: TTask = {
@@ -52,7 +53,7 @@ export default function TaskView({
         <ContextMenu
           variant="task"
           onEditClick={onEditClick}
-          onDeleteClick={() => deleteTask(task.id)}
+          onDeleteClick={onDeleteClick}
         />
       </S.HeaderWrapper>
       {!!task.description && (

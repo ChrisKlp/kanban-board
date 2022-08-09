@@ -29,6 +29,10 @@ const Wrapper = styled.p<WrapperProps>`
   ${({ theme, size, variant }) => css`
     ${!!size && textSizes[size]}
     ${!!variant && textVariants[variant](theme)}
+
+    & strong {
+      color: ${theme.colors.text.primary};
+    }
   `};
 `;
 

@@ -18,7 +18,7 @@ type TaskFormProps = {
   title: string;
   statusOptions?: string[];
   closeModal: () => void;
-  close2ndModal?: () => void;
+  toggleModals?: () => void;
 };
 
 function TaskForm({
@@ -26,7 +26,7 @@ function TaskForm({
   task,
   statusOptions,
   closeModal,
-  close2ndModal,
+  toggleModals,
 }: TaskFormProps) {
   const [values, setValues] = useState(
     task || {
@@ -97,8 +97,8 @@ function TaskForm({
       createTask(values);
     }
 
-    if (close2ndModal) {
-      close2ndModal();
+    if (toggleModals) {
+      toggleModals();
     } else {
       closeModal();
     }

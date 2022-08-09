@@ -6,6 +6,7 @@ import logoLight from 'assets/logo-light.svg';
 import logoMobile from 'assets/logo-mobile.svg';
 import BoardForm from 'components/BoardForm';
 import ContextMenu from 'components/ContextMenu';
+import DeleteModal from 'components/DeleteModal';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
 import TaskForm from 'components/TaskForm';
@@ -18,13 +19,18 @@ import useThemeState from 'stores/themeState';
 import * as S from './style';
 
 function Navbar() {
-  const { getActiveBoard, deleteBoard } = useBoardState();
+  const { getActiveBoard } = useBoardState();
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const { isModalOpen, closeModal, openModal } = useModal();
   const {
     isModalOpen: isFormModalOpen,
     closeModal: closeFormModal,
     openModal: openFormModal,
+  } = useModal();
+  const {
+    isModalOpen: isDeleteModalOpen,
+    closeModal: closeDeleteModal,
+    openModal: openDeleteModal,
   } = useModal();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
   const isTablet = useMediaQuery('(min-width: 768px)');
@@ -74,7 +80,7 @@ function Navbar() {
             </S.NewTaskButton>
             <ContextMenu
               variant="board"
-              onDeleteClick={deleteBoard}
+              onDeleteClick={openDeleteModal}
               onEditClick={openFormModal}
             />
           </div>
@@ -101,6 +107,9 @@ function Navbar() {
           board={getActiveBoard()}
           closeModal={closeFormModal}
         />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal title="Delete this board?" closeModal={closeDeleteModal} />
       )}
     </>
   );

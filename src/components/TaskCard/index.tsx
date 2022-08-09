@@ -1,3 +1,4 @@
+import DeleteModal from 'components/DeleteModal';
 import Heading from 'components/Heading';
 import TaskForm from 'components/TaskForm';
 import TaskView from 'components/TaskView';
@@ -19,6 +20,11 @@ function TaskCard({ task }: TaskCardProps) {
     closeModal: closeFormModal,
     openModal: openFormModal,
   } = useModal();
+  const {
+    isModalOpen: isDeleteModalOpen,
+    closeModal: closeDeleteModal,
+    openModal: openDeleteModal,
+  } = useModal();
 
   const statusOptions = getActiveBoard()?.columns.map((column) => column.name);
 
@@ -28,14 +34,14 @@ function TaskCard({ task }: TaskCardProps) {
   ).length;
   const subtasksStatus = `Subtasks (${completedSubtasksLength} of ${subtasksLength})`;
 
-  const open2ndModal = () => {
-    closeModal();
-    openFormModal();
-  };
-
-  const close2ndModal = () => {
+  const toggleModals = (isDeleteTask = false) => {
+    if (isModalOpen) {
+      closeModal();
+      return isDeleteTask ? openDeleteModal() : openFormModal();
+    }
+    closeDeleteModal();
     closeFormModal();
-    openModal();
+    return openModal();
   };
 
   return (
@@ -50,7 +56,8 @@ function TaskCard({ task }: TaskCardProps) {
         <TaskView
           task={task}
           closeModal={closeModal}
-          onEditClick={open2ndModal}
+          onEditClick={toggleModals}
+          onDeleteClick={() => toggleModals(true)}
           subtasksStatus={subtasksStatus}
           statusOptions={statusOptions}
         />
@@ -60,8 +67,16 @@ function TaskCard({ task }: TaskCardProps) {
           task={task}
           title="Edit Task"
           closeModal={closeFormModal}
-          close2ndModal={close2ndModal}
+          toggleModals={toggleModals}
           statusOptions={statusOptions}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          taskId={task.id}
+          title="Delete this task?"
+          closeModal={closeDeleteModal}
+          toggleModals={() => toggleModals(true)}
         />
       )}
     </>

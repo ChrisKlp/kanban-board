@@ -25,6 +25,7 @@ export default function TaskView({
   closeModal,
 }: TaskViewProps) {
   const editTask = useBoardState((s) => s.editTask);
+  const deleteTask = useBoardState((s) => s.deleteTask);
 
   const handleStatusChange = (value: string) => {
     const newTask: TTask = {
@@ -48,7 +49,11 @@ export default function TaskView({
     <Modal closeModal={closeModal}>
       <S.HeaderWrapper>
         <Heading as="h2">{task.title}</Heading>
-        <ContextMenu variant="task" onEditClick={onEditClick} />
+        <ContextMenu
+          variant="task"
+          onEditClick={onEditClick}
+          onDeleteClick={() => deleteTask(task.id)}
+        />
       </S.HeaderWrapper>
       {!!task.description && (
         <Text variant="secondary" size="large">

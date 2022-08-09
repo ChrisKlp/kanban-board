@@ -1,7 +1,7 @@
 import iconVerticalEllipsis from 'assets/icon-vertical-ellipsis.svg';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 import { useRef, useState } from 'react';
-import capitalizeFirstLetter from 'utils/stringUtils';
+import capitalizeFirstLetter from 'utils/string-utils';
 import * as S from './style';
 
 export type ContextMenuProps = {

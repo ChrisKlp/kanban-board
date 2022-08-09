@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 0 1.6rem;
   display: grid;
   place-items: center;
   z-index: 9999;

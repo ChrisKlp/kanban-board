@@ -44,6 +44,11 @@ function Navbar() {
     [isMenuOpen]
   );
 
+  const handleNewTaskClick = () => {
+    openModal();
+    if (isMenuOpen) handleMenuOpen();
+  };
+
   const closeMenu = () => setIsMenuOpen(false);
 
   const setLogo = () => {
@@ -74,7 +79,10 @@ function Navbar() {
           </S.NavDropdown>
           <Heading as="h2">{activeBoardTitle}</Heading>
           <div>
-            <S.NewTaskButton onClick={openModal}>
+            <S.NewTaskButton
+              onClick={handleNewTaskClick}
+              disabled={!getActiveBoard()?.columns.length}
+            >
               <img src={iconAddTaskMobile} alt="Add task icon" />
               <span>+ Add New Task</span>
             </S.NewTaskButton>

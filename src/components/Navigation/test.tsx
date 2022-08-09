@@ -2,15 +2,12 @@ import userEvent from '@testing-library/user-event';
 import { render } from 'utils/test-utils';
 import Navigation from '.';
 
-jest.mock('uuid', () => ({ v4: () => 'hjhj87878' }));
+jest.mock('uuid', () => ({ v4: () => '123123123' }));
 
 function renderNavigation() {
-  const onButtonClick = jest.fn();
   const onLinkClick = jest.fn();
 
-  const utils = render(
-    <Navigation onButtonClick={onButtonClick} onLinkClick={onLinkClick} />
-  );
+  const utils = render(<Navigation onLinkClick={onLinkClick} />);
 
   const wrapper = utils.getByTestId('navWrapper');
   const heading = utils.getByText(/All Boards/i);
@@ -28,7 +25,6 @@ function renderNavigation() {
     sideBarButton,
     themeSwitch,
     onLinkClick,
-    onButtonClick,
   };
 }
 
@@ -53,14 +49,6 @@ describe('<Navigation />', () => {
     expect(getByText('Marketing Plan')).toHaveStyle({
       color: '#828FA3',
     });
-  });
-
-  it('should call func on button press', () => {
-    const { button, onButtonClick } = renderNavigation();
-
-    userEvent.click(button);
-    expect(onButtonClick).toBeCalled();
-    expect(onButtonClick).toBeCalledTimes(1);
   });
 
   it('should call func on nav item press', () => {

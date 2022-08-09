@@ -8,7 +8,7 @@ import TextField from 'components/TextField';
 import { TTask } from 'models';
 import { useState } from 'react';
 import useBoardState from 'stores/boardState';
-import { FieldErrors, validateForm } from 'utils/validation';
+import { FieldErrors, validateTaskForm } from 'utils/validation';
 import { v4 as uuidv4 } from 'uuid';
 import { ReactSVG } from 'react-svg';
 import * as S from './style';
@@ -84,7 +84,7 @@ function TaskForm({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const fieldErrors = validateForm(values);
+    const fieldErrors = validateTaskForm(values);
 
     if (Object.keys(fieldErrors).length) {
       setErrors(fieldErrors);

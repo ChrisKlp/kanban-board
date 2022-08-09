@@ -11,7 +11,7 @@ type TBoardState = {
   boards: TBoard[];
   setActiveBoard: (id: string) => void;
   createBoard: (board: TBoard) => void;
-  editBoard: (board: TBoard) => void;
+  editBoard: (newBoard: TBoard) => void;
   deleteBoard: () => void;
   createTask: (task: TTask) => void;
   editTask: (newTask: TTask) => void;
@@ -51,7 +51,24 @@ const useBoardState = create<TBoardState>()(
         return get().setActiveBoard(activeBoard);
       },
 
-      editBoard: (board: TBoard) => {},
+      editBoard: (newBoard: TBoard) => {
+        set((state) => ({
+          boards: state.boards.map((board) =>
+            board.id === newBoard.id
+              ? {
+                  ...newBoard,
+                  columns: newBoard.columns.map((column) => ({
+                    ...column,
+                    tasks: column.tasks.map((task) => ({
+                      ...task,
+                      status: column.name,
+                    })),
+                  })),
+                }
+              : board
+          ),
+        }));
+      },
 
       createTask: (task: TTask) => {
         const { boards, activeBoard } = get();

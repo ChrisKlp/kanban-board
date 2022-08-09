@@ -4,6 +4,7 @@ import iconChevronUp from 'assets/icon-chevron-up.svg';
 import logoDark from 'assets/logo-dark.svg';
 import logoLight from 'assets/logo-light.svg';
 import logoMobile from 'assets/logo-mobile.svg';
+import BoardForm from 'components/BoardForm';
 import ContextMenu from 'components/ContextMenu';
 import Heading from 'components/Heading';
 import Navigation from 'components/Navigation';
@@ -20,6 +21,11 @@ function Navbar() {
   const { getActiveBoard, deleteBoard } = useBoardState();
   const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
   const { isModalOpen, closeModal, openModal } = useModal();
+  const {
+    isModalOpen: isFormModalOpen,
+    closeModal: closeFormModal,
+    openModal: openFormModal,
+  } = useModal();
   const isDarkTheme = useThemeState((state) => state.isDarkTheme);
   const isTablet = useMediaQuery('(min-width: 768px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,7 +72,11 @@ function Navbar() {
               <img src={iconAddTaskMobile} alt="Add task icon" />
               <span>+ Add New Task</span>
             </S.NewTaskButton>
-            <ContextMenu variant="board" onDeleteClick={deleteBoard} />
+            <ContextMenu
+              variant="board"
+              onDeleteClick={deleteBoard}
+              onEditClick={openFormModal}
+            />
           </div>
         </S.ContentWrapper>
       </S.Wrapper>
@@ -83,6 +93,13 @@ function Navbar() {
           title="Add New Task"
           closeModal={closeModal}
           statusOptions={statusOptions}
+        />
+      )}
+      {isFormModalOpen && (
+        <BoardForm
+          title="Edit Board"
+          board={getActiveBoard()}
+          closeModal={closeFormModal}
         />
       )}
     </>

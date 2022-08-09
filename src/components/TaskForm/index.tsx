@@ -10,6 +10,7 @@ import { useState } from 'react';
 import useBoardState from 'stores/boardState';
 import { FieldErrors, validateForm } from 'utils/validation';
 import { v4 as uuidv4 } from 'uuid';
+import { ReactSVG } from 'react-svg';
 import * as S from './style';
 
 type TaskFormProps = {
@@ -149,7 +150,7 @@ function TaskForm({
                   type="button"
                   onClick={() => handleDeleteSubtask(id)}
                 >
-                  <img src={iconCross} alt="delete icon" />
+                  <ReactSVG src={iconCross} />
                 </S.DeleteButton>
               </S.SubtaskFieldGroup>
             ))}

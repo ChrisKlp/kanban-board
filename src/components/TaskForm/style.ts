@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
   display: grid;
@@ -22,5 +22,17 @@ export const SubtaskFieldGroup = styled.div`
 `;
 
 export const DeleteButton = styled.button`
-  cursor: pointer;
+  ${({ theme }) => css`
+    cursor: pointer;
+
+    svg g {
+      transition: fill ${theme.transition.fast};
+    }
+
+    &:hover {
+      svg g {
+        fill: ${theme.colors.red500};
+      }
+    }
+  `};
 `;

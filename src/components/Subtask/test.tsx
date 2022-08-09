@@ -5,13 +5,13 @@ import Subtask from '.';
 let text: HTMLElement;
 let wrapper: ChildNode;
 let checkbox: ChildNode;
-let onChecked: jest.Mock;
+let onCheckboxChange: jest.Mock;
 
 describe('<Subtask/>', () => {
-  onChecked = jest.fn();
+  onCheckboxChange = jest.fn();
   beforeEach(() => {
     const utils = render(
-      <Subtask onChecked={onChecked}>Research the market</Subtask>
+      <Subtask onCheckboxChange={onCheckboxChange}>Research the market</Subtask>
     );
     text = utils.getByText(/Research the market/i);
     wrapper = utils.container.firstChild!;
@@ -42,6 +42,6 @@ describe('<Subtask/>', () => {
 
   it('should call onChecked function', () => {
     userEvent.click(text);
-    expect(onChecked).toBeCalled();
+    expect(onCheckboxChange).toBeCalled();
   });
 });

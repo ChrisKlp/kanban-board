@@ -6,6 +6,7 @@ import Select from 'components/Select';
 import Subtask from 'components/Subtask';
 import Text from 'components/Text';
 import { TTask } from 'models';
+import useBoardState from 'stores/boardState';
 import * as S from './style';
 
 type TaskViewProps = {
@@ -23,6 +24,26 @@ export default function TaskView({
   onEditClick,
   closeModal,
 }: TaskViewProps) {
+  const editTask = useBoardState((s) => s.editTask);
+
+  const handleStatusChange = (value: string) => {
+    const newTask: TTask = {
+      ...task,
+      status: value,
+    };
+    editTask(newTask);
+  };
+
+  const handleSubtaskChange = (field: string, value: boolean) => {
+    const newTask: TTask = {
+      ...task,
+      subtasks: task.subtasks.map((subtask) =>
+        subtask.id === field ? { ...subtask, isCompleted: value } : subtask
+      ),
+    };
+    editTask(newTask);
+  };
+
   return (
     <Modal closeModal={closeModal}>
       <S.HeaderWrapper>
@@ -37,7 +58,11 @@ export default function TaskView({
       <S.SubtasksWrapper>
         <Text variant="secondary">{subtasksStatus}</Text>
         {task.subtasks.map((subtask) => (
-          <Subtask key={subtask.id} isChecked={subtask.isCompleted}>
+          <Subtask
+            key={subtask.id}
+            isChecked={subtask.isCompleted}
+            onCheckboxChange={(v) => handleSubtaskChange(subtask.id, v)}
+          >
             {subtask.title}
           </Subtask>
         ))}
@@ -46,8 +71,9 @@ export default function TaskView({
         <S.StatusWrapper>
           <Text variant="secondary">Current Status</Text>
           <Select
-            title={task.status || 'Select status'}
+            title={task.status || statusOptions[0]}
             options={statusOptions}
+            onOptionSelect={(v) => handleStatusChange(v)}
           />
         </S.StatusWrapper>
       )}

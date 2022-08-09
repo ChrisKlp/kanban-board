@@ -10,12 +10,6 @@ function getActiveBoardIndex(boards: TBoard[], activeBoardId: string) {
   return boards.findIndex((board) => board.id === activeBoardId);
 }
 
-function getActiveColumnIndex(board: TBoard, taskId: string) {
-  return board.columns.findIndex((column) =>
-    column.tasks.find((task) => task.id === taskId)
-  );
-}
-
 type TBoardState = {
   activeBoard: string;
   boards: TBoard[];
@@ -64,8 +58,6 @@ const useBoardState = create<TBoardState>()(
         });
       },
 
-      changeTaskStatus: (status: Pick<TTask, 'status'>) => {},
-
       editTask: (newTask: TTask) => {
         const { boards, activeBoard } = get();
         const boardIndex = getActiveBoardIndex(boards, activeBoard);
@@ -79,7 +71,9 @@ const useBoardState = create<TBoardState>()(
           (task) => task.id === newTask.id
         );
 
-        if (column.name === newTask.status) {
+        const status = newTask.status || column.name;
+
+        if (column.name === status) {
           return set((state) => {
             state.boards[boardIndex].columns[columnIndex].tasks[taskIndex] =
               newTask;

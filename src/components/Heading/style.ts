@@ -45,9 +45,10 @@ const headingVariants = {
 const Wrapper = styled.span<WrapperProps>`
   ${({ theme, size, variant }) => css`
     font-weight: 700;
+    transition: color ${theme.transition.fast};
 
     ${!!size && headingSizes[size](theme)}
-    ${!!variant && headingVariants[variant](theme)}
+    ${!!variant && headingVariants[variant](theme)};
   `};
 `;
 

@@ -13,7 +13,11 @@ const headingSizes = {
     font-size: 1.5rem;
     line-height: 1.9rem;
   `,
-  large: (theme: DefaultTheme) => css`
+  large: () => css`
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+  `,
+  xlarge: (theme: DefaultTheme) => css`
     font-size: 1.8rem;
     line-height: 2.3rem;
 
@@ -21,10 +25,11 @@ const headingSizes = {
       font-size: 2rem;
       line-height: 2.5rem;
     }
-  `,
-  xlarge: () => css`
-    font-size: 2.4rem;
-    line-height: 3rem;
+
+    @media (${theme.media.lg}) {
+      font-size: 2.4rem;
+      line-height: 3rem;
+    }
   `,
 };
 

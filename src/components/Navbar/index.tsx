@@ -71,13 +71,15 @@ function Navbar() {
         </S.LogoWrapper>
         <S.ContentWrapper isSidebarOpen={isSidebarOpen}>
           <S.NavDropdown onClick={handleMenuOpen}>
-            <Heading>{activeBoardTitle}</Heading>
+            <Heading size="xlarge">{activeBoardTitle}</Heading>
             <img
               src={isMenuOpen ? iconChevronUp : iconChevronDown}
               alt="Board list dropdown icon"
             />
           </S.NavDropdown>
-          <Heading as="h2">{activeBoardTitle}</Heading>
+          <Heading as="h2" size="xlarge">
+            {activeBoardTitle}
+          </Heading>
           <div>
             <S.NewTaskButton
               onClick={handleNewTaskClick}

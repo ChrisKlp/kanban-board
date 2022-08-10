@@ -1,4 +1,5 @@
 import Board from 'components/Board';
+import EmptyBoard from 'components/EmptyBoard';
 import Layout from 'components/Layout';
 import useBoardState from 'stores/boardState';
 import useThemeState from 'stores/themeState';
@@ -14,7 +15,13 @@ function App() {
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyles />
-      <Layout>{board && <Board board={board} />}</Layout>
+      <Layout>
+        {board && board.columns.length > 0 ? (
+          <Board board={board} />
+        ) : (
+          <EmptyBoard />
+        )}
+      </Layout>
     </ThemeProvider>
   );
 }

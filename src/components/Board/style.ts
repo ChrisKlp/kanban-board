@@ -1,5 +1,6 @@
 import Heading from 'components/Heading';
 import styled, { css } from 'styled-components';
+import { columnHeaderColors } from 'styles/theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -25,8 +26,8 @@ export const ColumnWrapper = styled.div<{ newColumn?: boolean }>`
 export const Header = styled(Heading).attrs({
   size: 'small',
   variant: 'secondary',
-})`
-  ${({ theme }) => css`
+})<{ index: number }>`
+  ${({ theme, index }) => css`
     display: flex;
     gap: 1.2rem;
     margin-bottom: 2.4rem;
@@ -35,7 +36,9 @@ export const Header = styled(Heading).attrs({
       width: 1.5rem;
       height: 1.5rem;
       border-radius: 50%;
-      background-color: ${theme.colors.purple300};
+      background-color: ${columnHeaderColors[
+        index % columnHeaderColors.length
+      ]};
       content: '';
     }
   `};

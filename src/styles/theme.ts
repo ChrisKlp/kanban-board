@@ -13,6 +13,8 @@ const colors = {
   red300: '#FF9898',
 };
 
+export const columnHeaderColors = ['#49C4E5', '#8471F2', '#67E2AE'];
+
 const themeLight = {
   colors: {
     ...colors,

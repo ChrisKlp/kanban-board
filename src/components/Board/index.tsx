@@ -14,9 +14,11 @@ function Board({ board }: BoardProps) {
   return (
     <>
       <S.Wrapper>
-        {board.columns.map(({ id, name, tasks }) => (
+        {board.columns.map(({ id, name, tasks }, index) => (
           <S.ColumnWrapper key={id}>
-            <S.Header>{`${name.toUpperCase()} (${tasks.length})`}</S.Header>
+            <S.Header index={index}>{`${name.toUpperCase()} (${
+              tasks.length
+            })`}</S.Header>
             <S.TaskList>
               {tasks.map((task) => (
                 <TaskCard key={task.id} task={task} />

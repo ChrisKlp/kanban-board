@@ -14,12 +14,16 @@ export const Wrapper = styled.div`
 
 export const ColumnWrapper = styled.div<{ newColumn?: boolean }>`
   flex-shrink: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
 
   ${({ newColumn }) =>
     newColumn &&
     css`
       padding-top: 3.9rem;
       width: 28rem;
+      grid-template-rows: 1fr;
     `};
 `;
 
@@ -27,7 +31,7 @@ export const Header = styled(Heading).attrs({
   size: 'small',
   variant: 'secondary',
 })<{ index: number }>`
-  ${({ theme, index }) => css`
+  ${({ index }) => css`
     display: flex;
     gap: 1.2rem;
     margin-bottom: 2.4rem;
@@ -46,7 +50,8 @@ export const Header = styled(Heading).attrs({
 
 export const TaskList = styled.ul`
   display: grid;
-  gap: 2rem;
+  height: 100%;
+  align-content: start;
   width: 28rem;
 `;
 

@@ -14,7 +14,7 @@ type TBoardState = {
   editBoard: (newBoard: TBoard) => void;
   deleteBoard: () => void;
   createTask: (task: TTask) => void;
-  editTask: (newTask: TTask) => void;
+  editTask: (newTask: TTask, index?: number) => void;
   deleteTask: (id: string) => void;
   getActiveBoard: () => TBoard | undefined;
 };
@@ -82,18 +82,16 @@ const useBoardState = create<TBoardState>()(
         });
       },
 
-      editTask: (newTask: TTask) => {
+      editTask: (newTask: TTask, index?: number) => {
         const { boards, activeBoard } = get();
         const { boardIndex, columnIndex, taskIndex, column } =
           getTaskStructureData(boards, activeBoard, newTask.id);
 
         const status = newTask.status || column.name;
+        let newIndex = taskIndex;
 
-        if (column.name === status) {
-          return set((state) => {
-            state.boards[boardIndex].columns[columnIndex].tasks[taskIndex] =
-              newTask;
-          });
+        if (index && index !== taskIndex) {
+          newIndex = index;
         }
 
         set((state) => {
@@ -103,10 +101,20 @@ const useBoardState = create<TBoardState>()(
           );
         });
 
+        if (column.name === status) {
+          return set((state) => {
+            state.boards[boardIndex].columns[columnIndex].tasks.splice(
+              newIndex,
+              0,
+              newTask
+            );
+          });
+        }
+
         return set((state) => {
           state.boards[boardIndex].columns.map((boardColumn) =>
             boardColumn.name === newTask.status
-              ? boardColumn.tasks.unshift(newTask)
+              ? boardColumn.tasks.splice(index || 0, 0, newTask)
               : boardColumn
           );
         });

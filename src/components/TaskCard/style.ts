@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Wrapper = styled.li`
   ${({ theme }) => css`
+    margin-bottom: 2rem;
     padding: 2.3rem 1.6rem;
     display: grid;
     gap: 0.8rem;

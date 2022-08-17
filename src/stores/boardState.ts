@@ -88,10 +88,13 @@ const useBoardState = create<TBoardState>()(
           getTaskStructureData(boards, activeBoard, newTask.id);
 
         const status = newTask.status || column.name;
-        let newIndex = taskIndex;
+        const newIndex = index || index === 0 ? index : taskIndex;
 
-        if (index && index !== taskIndex) {
-          newIndex = index;
+        if (column.name === status && newIndex === taskIndex) {
+          return set((state) => {
+            state.boards[boardIndex].columns[columnIndex].tasks[newIndex] =
+              newTask;
+          });
         }
 
         set((state) => {

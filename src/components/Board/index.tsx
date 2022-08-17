@@ -17,7 +17,6 @@ function Board({ board }: BoardProps) {
   const editTask = useBoardState((s) => s.editTask);
 
   const onDragEnd = (result: DropResult) => {
-    console.log(result);
     if (!result.destination) return;
     const taskId = result.draggableId;
     const columnId = result.source.droppableId;

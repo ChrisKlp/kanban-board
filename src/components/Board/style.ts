@@ -58,8 +58,8 @@ export const TaskList = styled.ul`
 export const NewColumnButton = styled.button`
   ${({ theme }) => css`
     width: 100%;
-    min-height: calc(100vh - 16.6rem);
-    height: 100%;
+    min-height: calc(100vh - 18.6rem);
+    height: calc(100% - 2rem);
     background: ${theme.colors.gradient.primary};
     border-radius: 0.6rem;
     text-align: center;

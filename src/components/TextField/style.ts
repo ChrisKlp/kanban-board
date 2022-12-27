@@ -54,6 +54,7 @@ export const Input = styled.input<{ as?: React.ElementType }>`
     background-color: transparent;
     outline: none;
     border: none;
+    width: 100%;
 
     &::placeholder {
       color: ${theme.colors.text.primary};
@@ -72,5 +73,6 @@ export const ErrorText = styled.span`
   ${({ theme }) => css`
     ${text}
     color: ${theme.colors.red500};
+    white-space: nowrap;
   `};
 `;

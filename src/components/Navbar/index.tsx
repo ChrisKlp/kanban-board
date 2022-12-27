@@ -20,7 +20,7 @@ import * as S from './style';
 
 function Navbar() {
   const { getActiveBoard } = useBoardState();
-  const { isOpen: isSidebarOpen, toggleSidebar } = useSidebarState();
+  const { isOpen: isSidebarOpen } = useSidebarState();
   const { isModalOpen, closeModal, openModal } = useModal();
   const {
     isModalOpen: isFormModalOpen,
@@ -59,9 +59,8 @@ function Navbar() {
   };
 
   useEffect(() => {
-    if (!isTablet && isSidebarOpen) toggleSidebar();
     if (isTablet && isMenuOpen) handleMenuOpen();
-  }, [handleMenuOpen, isMenuOpen, isSidebarOpen, isTablet, toggleSidebar]);
+  }, [handleMenuOpen, isMenuOpen, isSidebarOpen, isTablet]);
 
   return (
     <>

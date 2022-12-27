@@ -5,7 +5,7 @@ import iconLight from 'assets/icon-light-theme.svg';
 import BoardForm from 'components/BoardForm';
 import Heading from 'components/Heading';
 import useModal from 'hooks/useModal';
-import { ForwardedRef, forwardRef } from 'react';
+import { ForwardedRef, forwardRef, useLayoutEffect } from 'react';
 import { ReactSVG } from 'react-svg';
 import useBoardState from 'stores/boardState';
 import useSidebarState from 'stores/sidebarState';
@@ -38,6 +38,17 @@ function Navigation(
     setActiveBoard(id);
     if (onLinkClick) onLinkClick();
   };
+
+  useLayoutEffect(() => {
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+
+    if (prefersDark && !isDarkTheme) {
+      toggleTheme();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
